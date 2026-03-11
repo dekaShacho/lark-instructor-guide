@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lark講座 講師ガイド</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a2e;
+  --cream: #faf8f5;
+  --accent: #e85d26;
+  --accent-light: #fff0eb;
+  --blue: #2d5aa0;
+  --blue-light: #e8f0fc;
+  --green: #1a7a5c;
+  --green-light: #e6f5ef;
+  --purple: #6b3fa0;
+  --purple-light: #f0e8fc;
+  --gray-100: #f5f4f2;
+  --gray-200: #e8e6e3;
+  --gray-400: #999;
+  --gray-600: #666;
+  --radius: 16px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 48px rgba(0,0,0,0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+.serif { font-family: 'Shippori Mincho', serif; }
+
+/* ─── Hero ─── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 24px;
+  background: linear-gradient(160deg, #1a1a2e 0%, #2d3561 50%, #1a1a2e 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(232,93,38,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(45,90,160,0.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 8px 24px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 100px;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  max-width: 600px;
+  margin-bottom: 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-quote {
+  max-width: 640px;
+  padding: 32px;
+  background: rgba(255,255,255,0.06);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  text-align: left;
+  font-size: 1rem;
+  line-height: 1.9;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-quote .source {
+  display: block;
+  margin-top: 12px;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  animation: bounce 2s infinite;
+}
+
+.scroll-hint svg { width: 24px; height: 24px; stroke: rgba(255,255,255,0.5); }
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ─── Nav ─── */
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250,248,245,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 0 24px;
+}
+
+.sticky-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  overflow-x: auto;
+  gap: 4px;
+  scrollbar-width: none;
+}
+
+.sticky-nav-inner::-webkit-scrollbar { display: none; }
+
+.nav-item {
+  flex: 0 0 auto;
+  padding: 16px 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.25s;
+  white-space: nowrap;
+}
+
+.nav-item:hover, .nav-item.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ─── Section ─── */
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 24px;
+}
+
+.section-tag {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+
+.tag-accent { background: var(--accent-light); color: var(--accent); }
+.tag-blue { background: var(--blue-light); color: var(--blue); }
+.tag-green { background: var(--green-light); color: var(--green); }
+.tag-purple { background: var(--purple-light); color: var(--purple); }
+
+.section-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+
+.section-lead {
+  font-size: 1.05rem;
+  color: var(--gray-600);
+  max-width: 720px;
+  margin-bottom: 48px;
+}
+
+/* ─── Philosophy ─── */
+.belief-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.belief-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow);
+  border-top: 4px solid var(--accent);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.belief-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.belief-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.belief-card h3 .num {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.belief-card p {
+  font-size: 0.95rem;
+  color: var(--gray-600);
+  line-height: 1.8;
+}
+
+/* ─── Level Journey ─── */
+.journey-container {
+  position: relative;
+  padding: 0 0 0 48px;
+}
+
+.journey-line {
+  position: absolute;
+  left: 23px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent), var(--blue), var(--green), var(--purple));
+}
+
+.journey-node {
+  position: relative;
+  margin-bottom: 48px;
+}
+
+.journey-node:last-child { margin-bottom: 0; }
+
+.journey-dot {
+  position: absolute;
+  left: -48px;
+  top: 24px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 3px solid;
+  background: var(--cream);
+  transform: translateX(8px);
+}
+
+.journey-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.journey-card:hover {
+  transform: translateX(8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.journey-card .level-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.level-1 .journey-dot { border-color: var(--accent); }
+.level-1 .level-badge { background: var(--accent-light); color: var(--accent); }
+.level-2 .journey-dot { border-color: var(--blue); }
+.level-2 .level-badge { background: var(--blue-light); color: var(--blue); }
+.level-3a .journey-dot { border-color: var(--green); }
+.level-3a .level-badge { background: var(--green-light); color: var(--green); }
+.level-3b .journey-dot { border-color: var(--purple); }
+.level-3b .level-badge { background: var(--purple-light); color: var(--purple); }
+
+.journey-card h3 {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.journey-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 0.85rem;
+  color: var(--gray-400);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.journey-card p {
+  font-size: 0.95rem;
+  color: var(--gray-600);
+  margin-bottom: 12px;
+}
+
+.features-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.features-list span {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--gray-100);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--gray-600);
+}
+
+/* ─── Wall Design ─── */
+.wall-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+.wall-card {
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.wall-header {
+  padding: 24px 32px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.wall-header.wall-l1 { background: linear-gradient(135deg, var(--accent), #d04a1a); }
+.wall-header.wall-l2a { background: linear-gradient(135deg, var(--blue), #1e3d7a); }
+.wall-header.wall-l2b { background: linear-gradient(135deg, var(--purple), #4a2875); }
+
+.wall-header h3 {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.wall-body {
+  padding: 32px;
+}
+
+.wall-essence {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 20px 24px;
+  background: var(--gray-100);
+  border-radius: 12px;
+  border-left: 4px solid var(--accent);
+  margin-bottom: 24px;
+  line-height: 1.7;
+}
+
+.voice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+
+.voice-table th {
+  text-align: left;
+  padding: 12px 16px;
+  background: var(--gray-100);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--gray-200);
+}
+
+.voice-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--gray-200);
+  font-size: 0.9rem;
+  vertical-align: top;
+}
+
+.voice-table td:first-child {
+  font-weight: 600;
+  width: 40%;
+}
+
+.voice-table td:last-child {
+  color: var(--gray-600);
+  font-style: italic;
+}
+
+.wall-do-dont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.do-box, .dont-box {
+  padding: 20px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.do-box {
+  background: #e6f5ef;
+  border: 1px solid #b3e0cc;
+}
+
+.do-box h4 { color: var(--green); margin-bottom: 8px; }
+
+.dont-box {
+  background: #fde8e8;
+  border: 1px solid #f5b3b3;
+}
+
+.dont-box h4 { color: #c0392b; margin-bottom: 8px; }
+
+.do-box ul, .dont-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.do-box li, .dont-box li {
+  padding: 4px 0;
+  padding-left: 20px;
+  position: relative;
+}
+
+.do-box li::before {
+  content: '○';
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-weight: 700;
+}
+
+.dont-box li::before {
+  content: '×';
+  position: absolute;
+  left: 0;
+  color: #c0392b;
+  font-weight: 700;
+}
+
+/* ─── Boundary ─── */
+.boundary-visual {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+@media (max-width: 900px) {
+  .boundary-visual { grid-template-columns: repeat(2, 1fr); }
+}
+
+.boundary-col {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: #fff;
+}
+
+.boundary-col-header {
+  padding: 16px 20px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.boundary-col-header.bc-l1 { background: var(--accent); }
+.boundary-col-header.bc-l2 { background: var(--blue); }
+.boundary-col-header.bc-l3a { background: var(--green); }
+.boundary-col-header.bc-l3b { background: var(--purple); }
+
+.boundary-col-body {
+  padding: 16px 20px;
+}
+
+.boundary-col-body .bc-item {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--gray-200);
+  font-size: 0.85rem;
+}
+
+.boundary-col-body .bc-item:last-child { border-bottom: none; }
+
+.principle-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.principle-card {
+  background: #fff;
+  padding: 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.principle-card h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--gray-200);
+}
+
+.principle-card p { font-size: 0.9rem; color: var(--gray-600); }
+
+/* ─── NG List ─── */
+.ng-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.ng-category {
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.ng-category-header {
+  padding: 20px 24px;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ng-category-header .cat-num {
+  width: 24px;
+  height: 24px;
+  background: var(--accent);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.ng-category-body { padding: 20px 24px; }
+
+.ng-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.ng-item:last-child { border-bottom: none; }
+
+.ng-item .ng-label {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #c0392b;
+  margin-bottom: 4px;
+}
+
+.ng-item .ng-reason {
+  font-size: 0.85rem;
+  color: var(--gray-600);
+}
+
+.ng-item .ng-correct {
+  font-size: 0.85rem;
+  color: var(--green);
+  margin-top: 4px;
+  padding-left: 16px;
+  position: relative;
+}
+
+.ng-item .ng-correct::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+}
+
+/* ─── Deliverables ─── */
+.deliverables-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.deliverable-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  position: relative;
+  border-left: 4px solid;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.deliverable-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.deliverable-card.dc-shared { border-left-color: var(--ink); }
+.deliverable-card.dc-l1 { border-left-color: var(--accent); }
+.deliverable-card.dc-l2 { border-left-color: var(--blue); }
+.deliverable-card.dc-all { border-left-color: var(--green); }
+
+.deliverable-card .dc-level {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.deliverable-card h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.deliverable-card p {
+  font-size: 0.85rem;
+  color: var(--gray-600);
+}
+
+/* ─── Instructor Rules ─── */
+.rules-block {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.rule-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow);
+}
+
+.rule-card .rule-num {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+.rule-card h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.rule-card p {
+  font-size: 0.9rem;
+  color: var(--gray-600);
+}
+
+/* ─── Decision Flow ─── */
+.flow-visual {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.flow-step {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 0;
+}
+
+.flow-connector {
+  width: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flow-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: 0 0 auto;
+  margin-top: 20px;
+}
+
+.flow-line {
+  width: 2px;
+  flex: 1;
+  background: var(--gray-200);
+}
+
+.flow-content {
+  flex: 1;
+  padding: 16px 0 24px 16px;
+}
+
+.flow-question {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.flow-answers {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.flow-answer {
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.flow-yes { background: #e6f5ef; color: var(--green); }
+.flow-no { background: #fde8e8; color: #c0392b; }
+
+/* ─── L2 Curriculum ─── */
+.curriculum-months {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 900px) {
+  .curriculum-months { grid-template-columns: 1fr; }
+}
+
+.month-block {
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.month-header {
+  padding: 20px 24px;
+  background: linear-gradient(135deg, var(--blue), #1e3d7a);
+  color: #fff;
+}
+
+.month-header h3 {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.month-header p {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-top: 4px;
+}
+
+.month-sessions { padding: 20px 24px; }
+
+.session-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.session-item:last-child { border-bottom: none; }
+
+.session-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 4px;
+}
+
+.session-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.session-goal {
+  font-size: 0.8rem;
+  color: var(--gray-600);
+}
+
+/* ─── Footer ─── */
+.footer {
+  padding: 60px 24px;
+  background: var(--ink);
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.footer-quote {
+  max-width: 640px;
+  margin: 0 auto 32px;
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.2rem;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.8;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .wall-do-dont { grid-template-columns: 1fr; }
+  .boundary-visual { grid-template-columns: 1fr; }
+  .section { padding: 64px 16px; }
+  .journey-container { padding-left: 36px; }
+  .journey-line { left: 16px; }
+  .journey-dot { left: -36px; }
+}
+
+/* ─── Scroll Animation ─── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <span class="hero-badge">INSTRUCTOR GUIDE</span>
+  <h1 class="serif">
+    Lark講座<br>
+    <em>講師ガイド</em>ポータル
+  </h1>
+  <p class="hero-sub">
+    講師として関わるすべての方へ。<br>
+    この講座の目的、設計意図、守るべきルールのすべてをまとめています。
+  </p>
+  <div class="hero-quote">
+    経営を変えるのはツールではない。<strong>思考</strong>である。<br>
+    Lark講座は、ツールの使い方を教える場所ではありません。<br>
+    「仕事が流れる状態」を一緒に作り、その先にある<br>
+    <strong>「本来やるべき仕事に熱狂できる時間」</strong>を受講生に届ける場所です。
+    <span class="source">― Lark講座 理念書より</span>
+  </div>
+  <div class="scroll-hint">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="sticky-nav">
+  <div class="sticky-nav-inner">
+    <a href="#philosophy" class="nav-item">理念</a>
+    <a href="#journey" class="nav-item">レベル体系</a>
+    <a href="#curriculum" class="nav-item">カリキュラム</a>
+    <a href="#wall" class="nav-item">「次の壁」設計</a>
+    <a href="#boundary" class="nav-item">境界線ルール</a>
+    <a href="#rules" class="nav-item">講師の心得</a>
+    <a href="#deliverables" class="nav-item">成果物</a>
+    <a href="#ng" class="nav-item">NGリスト</a>
+    <a href="#flow" class="nav-item">判断フロー</a>
+  </div>
+</nav>
+
+<!-- ═══════════ PHILOSOPHY ═══════════ -->
+<section class="section" id="philosophy">
+  <div class="fade-up">
+    <span class="section-tag tag-accent">PHILOSOPHY</span>
+    <h2 class="section-title">僕たちが信じていること</h2>
+    <p class="section-lead">
+      元々ツール4つに振り回されていた原体験から生まれた講座。<br>
+      「止まっている人の背中を押す場所」としての4つの信念。
+    </p>
+  </div>
+  <div class="belief-grid fade-up">
+    <div class="belief-card">
+      <h3><span class="num">1</span>思考を変える</h3>
+      <p>Larkは手段。経営者の「思考」が変わらなければ何も変わらない。操作方法の前に「なぜこの仕組みが必要か」を必ず伝える。</p>
+    </div>
+    <div class="belief-card">
+      <h3><span class="num">2</span>属人化は設計ミス</h3>
+      <p>「あの人がいないと回らない」は仕組みの欠陥。誰かが休んでも辞めてもビジネスが回る状態を作る。それをLarkで実現する。</p>
+    </div>
+    <div class="belief-card">
+      <h3><span class="num">3</span>努力を無駄にしない</h3>
+      <p>みんな頑張っている。でもツールがバラバラだと努力が成果に繋がらない。頑張りがちゃんと報われる仕組みを一緒に作る。</p>
+    </div>
+    <div class="belief-card">
+      <h3><span class="num">4</span>浮いた時間で何をするか</h3>
+      <p>業務効率化はゴールではなくスタート。「仕組みができた後、あなたは何をしたいですか？」を常に問いかける。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ JOURNEY ═══════════ -->
+<section class="section" id="journey" style="background: var(--gray-100);">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="fade-up">
+      <span class="section-tag tag-blue">LEVEL SYSTEM</span>
+      <h2 class="section-title">レベル体系と視座の変化</h2>
+      <p class="section-lead">
+        各レベルは「何を教えるか」ではなく「受講生の視座をどこまで引き上げるか」で設計されている。
+      </p>
+    </div>
+    <div class="journey-container fade-up">
+      <div class="journey-line"></div>
+
+      <div class="journey-node level-1">
+        <div class="journey-dot"></div>
+        <div class="journey-card">
+          <span class="level-badge">LEVEL 1</span>
+          <h3>Lark Basic（基礎マスターコース）</h3>
+          <div class="journey-meta">
+            <span>1ヶ月 / ¥198,000</span>
+            <span>全3〜4回</span>
+            <span>視座：自分の仕事</span>
+          </div>
+          <p>1人で使う全体機能をマスターし、自社の業務システムを構築する。「自分の仕事の構造が見えた」がゴール。</p>
+          <div class="features-list">
+            <span>メッセンジャー</span>
+            <span>カレンダー</span>
+            <span>ドキュメント</span>
+            <span>Wiki</span>
+            <span>Base基礎</span>
+            <span>ルックアップ</span>
+            <span>双方向関連</span>
+            <span>ビュー</span>
+            <span>ダッシュボード</span>
+            <span>基礎自動化</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="journey-node level-2">
+        <div class="journey-dot"></div>
+        <div class="journey-card">
+          <span class="level-badge">LEVEL 2</span>
+          <h3>Builder（構築者コース）</h3>
+          <div class="journey-meta">
+            <span>3ヶ月 / ¥598,000</span>
+            <span>全12回</span>
+            <span>視座：相手の組織</span>
+          </div>
+          <p>「自分の業務を効率化する人」から「相手の組織の課題を解決する人」へ。組織向け機能を習得し、模擬案件で実践力を仕上げる。</p>
+          <div class="features-list">
+            <span>承認フロー</span>
+            <span>ワークプレイス</span>
+            <span>フロー（自動化内）</span>
+            <span>権限設計</span>
+            <span>組織チャット設計</span>
+            <span>管理コンソール</span>
+            <span>条件分岐自動化</span>
+            <span>複数テーブル連動</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="journey-node level-3a">
+        <div class="journey-dot"></div>
+        <div class="journey-card">
+          <span class="level-badge">LEVEL 3A</span>
+          <h3>Consultant（クライアントコース）</h3>
+          <div class="journey-meta">
+            <span>3ヶ月 / ¥400,000〜</span>
+            <span>視座：ビジネス</span>
+          </div>
+          <p>構築力をビジネスに変える。営業導線・提案・契約・定着支援のスキルを身につけ、実案件の受注と継続サポートができる状態を作る。</p>
+          <div class="features-list">
+            <span>営業・リード獲得</span>
+            <span>提案書作成</span>
+            <span>デモンストレーション</span>
+            <span>クロージング</span>
+            <span>契約書</span>
+            <span>価格設定</span>
+            <span>定着支援</span>
+            <span>月額サポート設計</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="journey-node level-3b">
+        <div class="journey-dot"></div>
+        <div class="journey-card">
+          <span class="level-badge">LEVEL 3B</span>
+          <h3>Expert（エキスパートコース）</h3>
+          <div class="journey-meta">
+            <span>3ヶ月 / ¥400,000〜</span>
+            <span>視座：技術の境界</span>
+          </div>
+          <p>Larkの中だけでは解決できない課題に挑む。外部システム連携、API、AI統合で高単価の技術案件を獲得できるエキスパートを目指す。</p>
+          <div class="features-list">
+            <span>Lark Open API</span>
+            <span>GAS連携</span>
+            <span>Webhook</span>
+            <span>MCP連携</span>
+            <span>Make / Zapier</span>
+            <span>正規化理論</span>
+            <span>大規模データ運用</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CURRICULUM (L2) ═══════════ -->
+<section class="section" id="curriculum">
+  <div class="fade-up">
+    <span class="section-tag tag-blue">CURRICULUM</span>
+    <h2 class="section-title">レベル2 カリキュラム全12回</h2>
+    <p class="section-lead">
+      各回のテーマ・ゴール・成果物は共通。教え方のスタイルは講師の経験を活かしてください。
+    </p>
+  </div>
+  <div class="curriculum-months fade-up">
+    <div class="month-block">
+      <div class="month-header">
+        <h3>Month 1</h3>
+        <p>基礎完成 & 組織向け機能の習得</p>
+      </div>
+      <div class="month-sessions">
+        <div class="session-item">
+          <div class="session-num">第1回</div>
+          <div class="session-title">Lark基礎 & 環境構築</div>
+          <div class="session-goal">全員がLark基本機能で業務管理できる状態に</div>
+        </div>
+        <div class="session-item">
+          <div class="session-num">第2回</div>
+          <div class="session-title">承認フロー & フロー設計</div>
+          <div class="session-goal">承認プロセスを設計し、Lark上で動く承認フローを構築</div>
+        </div>
+        <div class="session-item">
+          <div class="session-num">第3回</div>
+          <div class="session-title">ワークプレイス & 権限設計</div>
+          <div class="session-goal">組織ポータルの構築と部門別権限設計</div>
+        </div>
+        <div class="session-item">
+          <div class="session-num">第4回</div>
+          <div class="session-title">高度な自動化 & 統合</div>
+          <div class="session-goal">条件分岐・承認トリガーを含む複合自動化の実装</div>
+        </div>
+      </div>
+    </div>
+    <div class="month-block">
+      <div class="month-header">
+        <h3>Month 2</h3>
+        <p>設計力 & 提案力の強化</p>
+      </div>
+      <div class="month-sessions">
+        <div class="session-item">
+          <div class="session-num">第5回</div>
+          <div class="session-title">構築者の視座 & ヒアリング技術</div>
+          <div class="session-goal">他者の業務課題を引き出すヒアリングの「型」を習得</div>
+        </div>
+        <div class="session-item">
+          <div class="session-num">第6回</div>
+          <div class="session-title">要件定義 & 設計図作成</div>
+          <div class="session-goal">ヒアリング結果を要件定義書・項目定義書に落とし込む</div>
+        </div>
+        <div class="session-item">
+          <div class="session-num">第7回</div>
+          <div class="session-title">業種別構築パターン</div>
+          <div class="session-goal">業種ごとの典型課題と構築パターンを複数習得</div>
+        </div>
+        <div class="session-item">
+          <div class="session-num">第8回</div>
+          <div class="session-title">段階的導入 & 中間レビュー</div>
+          <div class="session-goal">MVP→段階拡張の設計 / Month 1-2の統合発表</div>
+        </div>
+      </div>
+    </div>
+    <div class="month-block">
+      <div class="month-header">
+        <h3>Month 3</h3>
+        <p>模擬案件で実践力を仕上げ</p>
+      </div>
+      <div class="month-sessions">
+        <div class="session-item">
+          <div class="session-num">第9回</div>
+          <div class="session-title">模擬案件：要件定義 & 設計</div>
+          <div class="session-goal">模擬クライアントへのヒアリングから設計まで完走</div>
+        </div>
+        <div class="session-item">
+          <div class="session-num">第10回</div>
+          <div class="session-title">模擬案件：構築</div>
+          <div class="session-goal">設計に基づいてLark環境を実際に構築</div>
+        </div>
+        <div class="session-item">
+          <div class="session-num">第11回</div>
+          <div class="session-title">模擬案件：納品資料 & プレゼン準備</div>
+          <div class="session-goal">クライアント向け納品資料の作成とプレゼン準備</div>
+        </div>
+        <div class="session-item">
+          <div class="session-num">第12回</div>
+          <div class="session-title">修了発表会：模擬納品プレゼン</div>
+          <div class="session-goal">クライアント役への納品プレゼンで構築者ポートフォリオ完成</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ WALL DESIGN ═══════════ -->
+<section class="section" id="wall" style="background: var(--gray-100);">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="fade-up">
+      <span class="section-tag tag-accent">NEXT WALL DESIGN</span>
+      <h2 class="section-title">「次の壁」設計の意図</h2>
+      <p class="section-lead">
+        押し売りは信頼を壊す。講師が売り込むのではなく、受講者が自分の手を動かした結果として「次の壁」に自然と気づく構造を作る。
+      </p>
+    </div>
+
+    <div class="wall-container fade-up">
+      <div class="wall-card">
+        <div class="wall-header wall-l1">
+          <h3>レベル1修了時に見える壁</h3>
+        </div>
+        <div class="wall-body">
+          <div class="wall-essence">
+            「自分では使えるようになった。でも、他の人に教えようとしたとき、自分の知識だけでは足りないことに気づく」
+          </div>
+          <table class="voice-table">
+            <thead><tr><th>場面</th><th>受講者の心の声</th></tr></thead>
+            <tbody>
+              <tr><td>知人に「うちにもやってよ」と言われた</td><td>「相手の会社は従業員がいる。承認とか権限ってどうするの？」</td></tr>
+              <tr><td>他の受講生の複雑な設計を見た</td><td>「もっと複雑な要件にはどう対応する？」</td></tr>
+              <tr><td>「自動化をもっとやりたい」と思った</td><td>「条件分岐とか承認連動はどうやるの？」</td></tr>
+            </tbody>
+          </table>
+          <div class="wall-do-dont">
+            <div class="do-box">
+              <h4>講師がやること</h4>
+              <ul>
+                <li>「この仕組み、他の会社にも展開できそう？」</li>
+                <li>「10人の会社に導入するなら何が変わる？」</li>
+                <li>問いかけで終わる。答えは与えない</li>
+              </ul>
+            </div>
+            <div class="dont-box">
+              <h4>絶対にやらないこと</h4>
+              <ul>
+                <li>「レベル2ではこれが学べます」と商品紹介</li>
+                <li>レベル2の価格や内容を発表会で説明</li>
+                <li>「もっと上を目指すなら」と誘導する</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wall-card">
+        <div class="wall-header wall-l2a">
+          <h3>レベル2修了時の壁A：「作れるけど、売り方が分からない」→ 3A</h3>
+        </div>
+        <div class="wall-body">
+          <div class="wall-essence">
+            構築力は手に入った。でもビジネスとして回すための営業・契約・定着支援のスキルが足りない。
+          </div>
+          <table class="voice-table">
+            <thead><tr><th>場面</th><th>受講者の心の声</th></tr></thead>
+            <tbody>
+              <tr><td>模擬納品プレゼンが終わった</td><td>「本当のクライアントをどうやって見つける？」</td></tr>
+              <tr><td>「価格はいくらにする？」と聞かれた</td><td>「いくらで売ればいいか全然分からない」</td></tr>
+              <tr><td>構築した環境の「その後」を考えた</td><td>「使われなくなったら？定着させるには？」</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="wall-card">
+        <div class="wall-header wall-l2b">
+          <h3>レベル2修了時の壁B：「Larkの中だけでは限界がある」→ 3B</h3>
+        </div>
+        <div class="wall-body">
+          <div class="wall-essence">
+            Lark内部の機能は使いこなせる。でもクライアントの既存システムと連携したり、より高度な自動化をするには今の技術では足りない。
+          </div>
+          <table class="voice-table">
+            <thead><tr><th>場面</th><th>受講者の心の声</th></tr></thead>
+            <tbody>
+              <tr><td>「kintoneのデータと連携して」と言われた</td><td>「データの同期...Larkの中だけじゃ無理じゃない？」</td></tr>
+              <tr><td>「LINE問い合わせをBaseに自動登録したい」</td><td>「Webhookって聞いたことはあるけど...」</td></tr>
+              <tr><td>「AIで自動分類してBaseに振り分けたい」</td><td>「MCPとかAPIとか触ったことがない」</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ BOUNDARY ═══════════ -->
+<section class="section" id="boundary">
+  <div class="fade-up">
+    <span class="section-tag tag-green">BOUNDARY RULES</span>
+    <h2 class="section-title">レベル間の内容境界線</h2>
+    <p class="section-lead">
+      異なる講師が各レベルを担当する中で、内容の重複・矛盾・先取りを防ぐルール。
+    </p>
+  </div>
+
+  <div class="boundary-visual fade-up">
+    <div class="boundary-col">
+      <div class="boundary-col-header bc-l1">L1：自分の仕事</div>
+      <div class="boundary-col-body">
+        <div class="bc-item">メッセンジャー（個人）</div>
+        <div class="bc-item">カレンダー（個人）</div>
+        <div class="bc-item">ドキュメント・Wiki</div>
+        <div class="bc-item">Base基礎</div>
+        <div class="bc-item">ルックアップ・双方向関連</div>
+        <div class="bc-item">ビュー・ダッシュボード</div>
+        <div class="bc-item">基礎自動化</div>
+        <div class="bc-item">タスク管理（個人）</div>
+      </div>
+    </div>
+    <div class="boundary-col">
+      <div class="boundary-col-header bc-l2">L2：相手の組織</div>
+      <div class="boundary-col-body">
+        <div class="bc-item">承認フロー</div>
+        <div class="bc-item">ワークプレイス</div>
+        <div class="bc-item">フロー（自動化内）</div>
+        <div class="bc-item">権限設計</div>
+        <div class="bc-item">組織チャット設計</div>
+        <div class="bc-item">管理コンソール</div>
+        <div class="bc-item">条件分岐自動化</div>
+        <div class="bc-item">複数テーブル連動</div>
+      </div>
+    </div>
+    <div class="boundary-col">
+      <div class="boundary-col-header bc-l3a">L3A：ビジネス</div>
+      <div class="boundary-col-body">
+        <div class="bc-item">営業・リード獲得</div>
+        <div class="bc-item">提案書作成</div>
+        <div class="bc-item">デモンストレーション</div>
+        <div class="bc-item">クロージング</div>
+        <div class="bc-item">契約書</div>
+        <div class="bc-item">価格設定</div>
+        <div class="bc-item">定着支援</div>
+        <div class="bc-item">月額サポート設計</div>
+      </div>
+    </div>
+    <div class="boundary-col">
+      <div class="boundary-col-header bc-l3b">L3B：技術の境界</div>
+      <div class="boundary-col-body">
+        <div class="bc-item">Lark Open API</div>
+        <div class="bc-item">GAS連携</div>
+        <div class="bc-item">Webhook</div>
+        <div class="bc-item">MCP連携</div>
+        <div class="bc-item">Make / Zapier</div>
+        <div class="bc-item">正規化理論</div>
+        <div class="bc-item">大規模データ運用</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="principle-cards fade-up">
+    <div class="principle-card">
+      <h4>原則 1：視座に合わない内容は扱わない</h4>
+      <p>各レベルには「視座」がある。その視座に合わない内容を教えると、受講者が混乱し、次のレベルの価値が薄れる。</p>
+    </div>
+    <div class="principle-card">
+      <h4>原則 2：前提OKだが教え直しはNG</h4>
+      <p>前のレベルで教えた内容を「前提」として使うのはOK。同じ深さで教え直すのはNG。受講者の時間を無駄にしない。</p>
+    </div>
+    <div class="principle-card">
+      <h4>原則 3：ほのめかしOKだが教えるのはNG</h4>
+      <p>次のレベルの内容を「存在をほのめかす」のはOK。「教える」のはNG。壁の設計が崩れる。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ INSTRUCTOR RULES ═══════════ -->
+<section class="section" id="rules" style="background: var(--gray-100);">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="fade-up">
+      <span class="section-tag tag-accent">INSTRUCTOR CODE</span>
+      <h2 class="section-title">講師に守ってほしい5つのこと</h2>
+      <p class="section-lead">
+        講師の仕事は「機能の説明」ではなく、受講生の視座をそのレベルに合った高さまで引き上げること。
+      </p>
+    </div>
+    <div class="rules-block fade-up">
+      <div class="rule-card">
+        <div class="rule-num">1</div>
+        <h4>「教える」のではなく<br>「視座を上げる」</h4>
+        <p>「どう操作するか」の前に「なぜそうするのか」「誰のためにやるのか」を伝える。受講生が「Larkの使い方を覚えた」ではなく「自分の仕事の構造が見えた」と思える状態を目指す。</p>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">2</div>
+        <h4>受講生に<br>「作り切る」体験をさせる</h4>
+        <p>講義で知識を渡すだけでは足りない。修了発表会で「自分の手で作り切った」という実感を持って立てる状態を目指す。発表会は講座の根幹。</p>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">3</div>
+        <h4>「次の壁」は自然に見せる<br>押し売りしない</h4>
+        <p>カリキュラムの構造が生み出す気づきであり、講師が「次のコースも買ってください」と言うものではない。受講生自身が「もっと先に行きたい」と思う状態を作る。</p>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">4</div>
+        <h4>受講生の努力を<br>絶対に否定しない</h4>
+        <p>ITリテラシーゼロからBase構築できるようになった事例がいくつもある。どんなスタート地点でも「変えたい」と思って来ている人。その努力を認め、伴走する。</p>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">5</div>
+        <h4>自分自身の経験と<br>言葉で語る</h4>
+        <p>共通カリキュラムの骨格は守る。しかし「どう伝えるか」は講師自身の経験が活きる部分。リアルなエピソードこそが受講生の心を動かす。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ DELIVERABLES ═══════════ -->
+<section class="section" id="deliverables">
+  <div class="fade-up">
+    <span class="section-tag tag-blue">DELIVERABLES</span>
+    <h2 class="section-title">成果物 共通テンプレート</h2>
+    <p class="section-lead">
+      全講師が共通で使用するフォーマット。独自テンプレートの追加はOKだが、共通フォーマットの省略・差し替えはNG。
+    </p>
+  </div>
+  <div class="deliverables-timeline fade-up">
+    <div class="deliverable-card dc-shared">
+      <div class="dc-level" style="color: var(--ink);">L1 / L2 共通</div>
+      <h4>業務課題マップ</h4>
+      <p>現状の業務を棚卸しし、課題とゴールを整理するためのフォーマット。受講初回で使用。</p>
+    </div>
+    <div class="deliverable-card dc-l2">
+      <div class="dc-level" style="color: var(--blue);">LEVEL 2</div>
+      <h4>ヒアリングシート</h4>
+      <p>クライアントの業務課題を構造的に引き出す。As-Is / To-Be / 組織の制約 / 優先順位合意まで。</p>
+    </div>
+    <div class="deliverable-card dc-l2">
+      <div class="dc-level" style="color: var(--blue);">LEVEL 2</div>
+      <h4>要件定義書</h4>
+      <p>ヒアリング結果をクライアントとの合意文書に構造化。スコープ・業務フロー・テーブル設計を含む。</p>
+    </div>
+    <div class="deliverable-card dc-l2">
+      <div class="dc-level" style="color: var(--blue);">LEVEL 2</div>
+      <h4>項目定義書</h4>
+      <p>テーブルの各フィールドを実装レベルで定義。型・必須・入力方法・用途を明確化。</p>
+    </div>
+    <div class="deliverable-card dc-l2">
+      <div class="dc-level" style="color: var(--blue);">LEVEL 2</div>
+      <h4>導入ロードマップ</h4>
+      <p>Phase 1（MVP）→ Phase 2（拡張）→ Phase 3（最適化）の段階的導入計画。</p>
+    </div>
+    <div class="deliverable-card dc-l2">
+      <div class="dc-level" style="color: var(--blue);">LEVEL 2</div>
+      <h4>納品資料（運用マニュアル）</h4>
+      <p>クライアントのスタッフが見て操作できるレベルの引き渡し文書。FAQ・拡張案を含む。</p>
+    </div>
+    <div class="deliverable-card dc-all">
+      <div class="dc-level" style="color: var(--green);">全レベル</div>
+      <h4>修了評価シート</h4>
+      <p>講師が記入。5段階評価 + 修了認定（合格 / 条件付き合格 / 再提出）。基準を統一しフィードバックを返す。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ NG LIST ═══════════ -->
+<section class="section" id="ng" style="background: var(--gray-100);">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="fade-up">
+      <span class="section-tag tag-accent">NG LIST</span>
+      <h2 class="section-title">やってはいけないこと</h2>
+      <p class="section-lead">
+        ミスを責めるためではなく、事前に知っておくことで事故を防ぐためのリスト。
+      </p>
+    </div>
+    <div class="ng-grid fade-up">
+      <div class="ng-category">
+        <div class="ng-category-header"><span class="cat-num">1</span>カリキュラム</div>
+        <div class="ng-category-body">
+          <div class="ng-item">
+            <div class="ng-label">他レベルの内容を教える</div>
+            <div class="ng-reason">レベル間の境界は意図的に設計されている。越境すると「次の壁」が見えなくなる。</div>
+            <div class="ng-correct">「存在をほのめかす」に留める。教えるのはNG。</div>
+          </div>
+          <div class="ng-item">
+            <div class="ng-label">前のレベルの内容を同じ深さで教え直す</div>
+            <div class="ng-reason">卒業生が退屈する。直接受講者にも非効率。</div>
+            <div class="ng-correct">速習で概念を伝え、実践の中で定着させる。</div>
+          </div>
+          <div class="ng-item">
+            <div class="ng-label">全12回のテーマ順序を入れ替える</div>
+            <div class="ng-reason">レベル間の一貫性が崩れる。進度が揃わなくなる。</div>
+            <div class="ng-correct">順序は共通。教え方のアレンジは自由。</div>
+          </div>
+          <div class="ng-item">
+            <div class="ng-label">修了発表会を省略する</div>
+            <div class="ng-reason">発表会はこの講座の根幹。「作り切る」体験の要。</div>
+            <div class="ng-correct">発表会は必ず実施。時間不足は他の回で調整。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ng-category">
+        <div class="ng-category-header"><span class="cat-num">2</span>受講者対応</div>
+        <div class="ng-category-body">
+          <div class="ng-item">
+            <div class="ng-label">スキル不足を責める</div>
+            <div class="ng-reason">スタート地点は人それぞれ。努力を否定しない。</div>
+            <div class="ng-correct">「一緒にやりましょう」と伴走する。</div>
+          </div>
+          <div class="ng-item">
+            <div class="ng-label">質問を軽く扱う</div>
+            <div class="ng-reason">質問できる環境こそが講座の価値。</div>
+            <div class="ng-correct">「良い質問ですね」と受け止めてから回答。</div>
+          </div>
+          <div class="ng-item">
+            <div class="ng-label">チャットの質問を放置する</div>
+            <div class="ng-reason">受講者は「見捨てられた」と感じる。</div>
+            <div class="ng-correct">24時間以内に初回返信。</div>
+          </div>
+          <div class="ng-item">
+            <div class="ng-label">他の受講者と比較する</div>
+            <div class="ng-reason">ペースは人それぞれ。比較は劣等感を生む。</div>
+            <div class="ng-correct">個人の進捗に合わせたフィードバック。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ng-category">
+        <div class="ng-category-header"><span class="cat-num">3</span>営業・アップセル</div>
+        <div class="ng-category-body">
+          <div class="ng-item">
+            <div class="ng-label">講義中に次のコースを宣伝する</div>
+            <div class="ng-reason">信頼が「売り込みだったのか」に変わる。</div>
+            <div class="ng-correct">壁はカリキュラムの構造で見せる。価格の話は一切しない。</div>
+          </div>
+          <div class="ng-item">
+            <div class="ng-label">修了発表会で営業する</div>
+            <div class="ng-reason">発表の感動が台無しになる。</div>
+            <div class="ng-correct">フィードバックと祝福で終わる。</div>
+          </div>
+          <div class="ng-item">
+            <div class="ng-label">壁を見せるときに答えを教える</div>
+            <div class="ng-reason">壁の本質は「答えがない状態に気づくこと」。</div>
+            <div class="ng-correct">問いかけで終わる。答えを与えない。</div>
+          </div>
+          <div class="ng-item">
+            <div class="ng-label">講師自身のサービスを販売する</div>
+            <div class="ng-reason">講師の立場を利用した販売行為。</div>
+            <div class="ng-correct">講座の場では講師個人のサービスは宣伝しない。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ng-category">
+        <div class="ng-category-header"><span class="cat-num">4</span>情報管理</div>
+        <div class="ng-category-body">
+          <div class="ng-item">
+            <div class="ng-label">受講者の成果物をSNSに無断投稿</div>
+            <div class="ng-reason">プライバシーと知的財産の侵害。</div>
+            <div class="ng-correct">掲載は本人の書面許可を得てから。</div>
+          </div>
+          <div class="ng-item">
+            <div class="ng-label">カリキュラム資料を外部に公開</div>
+            <div class="ng-reason">講座の知的財産の流出。</div>
+            <div class="ng-correct">講師向け資料は講座運営内に留める。</div>
+          </div>
+          <div class="ng-item">
+            <div class="ng-label">共通テンプレートを自分のサービスで流用</div>
+            <div class="ng-reason">講座の共有資産であり講師個人の資産ではない。</div>
+            <div class="ng-correct">講座外で使用する場合は運営に相談・許可。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ng-category">
+        <div class="ng-category-header"><span class="cat-num">5</span>講師間の関係</div>
+        <div class="ng-category-body">
+          <div class="ng-item">
+            <div class="ng-label">前のレベルの講師を批判する</div>
+            <div class="ng-reason">講座全体の信頼が崩れ、受講者が混乱する。</div>
+            <div class="ng-correct">「基礎の上に新しい視点を加えます」と接続。</div>
+          </div>
+          <div class="ng-item">
+            <div class="ng-label">講師定例会を欠席し続ける</div>
+            <div class="ng-reason">情報共有ができず改善が滞る。</div>
+            <div class="ng-correct">原則参加。やむを得ない場合は事前連絡。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ng-category">
+        <div class="ng-category-header"><span class="cat-num">6</span>講義の進め方</div>
+        <div class="ng-category-body">
+          <div class="ng-item">
+            <div class="ng-label">操作マニュアルを読み上げるだけ</div>
+            <div class="ng-reason">操作は動画で学べる。講師がいる意味がない。</div>
+            <div class="ng-correct">「なぜこの設計にするのか」の思考を伝える。</div>
+          </div>
+          <div class="ng-item">
+            <div class="ng-label">講師が一方的に話し続ける</div>
+            <div class="ng-reason">理解が確認できず受講者が受け身になる。</div>
+            <div class="ng-correct">講義30分・ワーク20分・質疑10分の配分。</div>
+          </div>
+          <div class="ng-item">
+            <div class="ng-label">発表会の時間を削る</div>
+            <div class="ng-reason">発表会は講座の根幹。削ってはいけない。</div>
+            <div class="ng-correct">発表会の時間は固定。講義内容で調整。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ DECISION FLOW ═══════════ -->
+<section class="section" id="flow">
+  <div class="fade-up">
+    <span class="section-tag tag-purple">DECISION FLOW</span>
+    <h2 class="section-title">迷ったときの判断フロー</h2>
+    <p class="section-lead">
+      「これを教えていいか？」と迷ったとき、この順序で確認してください。
+    </p>
+  </div>
+  <div class="flow-visual fade-up">
+    <div class="flow-step">
+      <div class="flow-connector"><div class="flow-dot"></div><div class="flow-line"></div></div>
+      <div class="flow-content">
+        <div class="flow-question">自分のレベルの「視座」に合っているか？</div>
+        <div class="flow-answers">
+          <span class="flow-answer flow-no">NO → 教えない</span>
+          <span class="flow-answer flow-yes">YES → 次へ</span>
+        </div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-connector"><div class="flow-dot"></div><div class="flow-line"></div></div>
+      <div class="flow-content">
+        <div class="flow-question">共通カリキュラムのテーマに含まれているか？</div>
+        <div class="flow-answers">
+          <span class="flow-answer flow-no">NO → 補足として軽く触れるのはOK</span>
+          <span class="flow-answer flow-yes">YES → 次へ</span>
+        </div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-connector"><div class="flow-dot"></div><div class="flow-line"></div></div>
+      <div class="flow-content">
+        <div class="flow-question">次のレベルの内容ではないか？</div>
+        <div class="flow-answers">
+          <span class="flow-answer flow-no">YES → 存在をほのめかすだけ。教えない</span>
+          <span class="flow-answer flow-yes">NO → 教えてOK</span>
+        </div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-connector"><div class="flow-dot" style="background: var(--green);"></div></div>
+      <div class="flow-content">
+        <div class="flow-question" style="color: var(--green);">教えてOK</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="footer-quote">
+    「Larkの操作より、どういう思考・構造で仕事をされるかが<br>学べたのがすごく大きかった」<br><br>
+    「クライアントがめっちゃ喜んでくれる。<br>喜んでくれるからまた次の方を紹介してくれる。<br>この連鎖が嬉しい」
+  </div>
+  <p>この連鎖を一緒に作ってくれる仲間として、講師の皆さんを迎えています。</p>
+  <p style="margin-top: 24px; opacity: 0.5;">Lark講座 講師ガイドポータル</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+const navItems = document.querySelectorAll('.nav-item');
+const sections = document.querySelectorAll('.section, section[id]');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    if (scrollY >= sectionTop - 120) {
+      current = section.getAttribute('id');
+    }
+  });
+  navItems.forEach(item => {
+    item.classList.remove('active');
+    if (item.getAttribute('href') === '#' + current) {
+      item.classList.add('active');
+    }
+  });
+});
+</script>
+</body>
+</html>

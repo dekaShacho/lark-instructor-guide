@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lark講座 コース全体像</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a2e;
+  --cream: #faf8f5;
+  --accent: #e85d26;
+  --accent-light: #fff0eb;
+  --blue: #2d5aa0;
+  --blue-light: #e8f0fc;
+  --green: #1a7a5c;
+  --green-light: #e6f5ef;
+  --purple: #6b3fa0;
+  --purple-light: #f0e8fc;
+  --gray-100: #f5f4f2;
+  --gray-200: #e8e6e3;
+  --gray-400: #999;
+  --gray-600: #666;
+  --radius: 16px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 48px rgba(0,0,0,0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Hero ─── */
+.hero {
+  padding: 80px 24px 60px;
+  text-align: center;
+  background: linear-gradient(160deg, #1a1a2e 0%, #2d3561 50%, #1a1a2e 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -15%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(232,93,38,0.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 6px 20px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 100px;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.4;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 em { font-style: normal; color: var(--accent); }
+
+.hero-sub {
+  font-size: 1rem;
+  opacity: 0.75;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Container ─── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px;
+}
+
+/* ─── Section titles ─── */
+.section-tag {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.tag-accent { background: var(--accent-light); color: var(--accent); }
+.tag-blue { background: var(--blue-light); color: var(--blue); }
+
+.section-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  font-weight: 800;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.section-lead {
+  font-size: 1rem;
+  color: var(--gray-600);
+  max-width: 700px;
+  margin-bottom: 40px;
+}
+
+/* ─── Persona Cards ─── */
+.persona-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 60px;
+}
+
+.persona-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow);
+  border-top: 4px solid;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.persona-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.persona-card.p-self { border-top-color: var(--accent); }
+.persona-card.p-biz { border-top-color: var(--blue); }
+.persona-card.p-tech { border-top-color: var(--purple); }
+
+.persona-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+}
+
+.persona-card.p-self .persona-icon { background: var(--accent-light); }
+.persona-card.p-biz .persona-icon { background: var(--blue-light); }
+.persona-card.p-tech .persona-icon { background: var(--purple-light); }
+
+.persona-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.persona-card p {
+  font-size: 0.9rem;
+  color: var(--gray-600);
+  margin-bottom: 12px;
+}
+
+.persona-route {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.persona-card.p-self .persona-route { background: var(--accent-light); color: var(--accent); }
+.persona-card.p-biz .persona-route { background: var(--blue-light); color: var(--blue); }
+.persona-card.p-tech .persona-route { background: var(--purple-light); color: var(--purple); }
+
+/* ─── Main Comparison Table ─── */
+.table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 60px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+}
+
+.comparison-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 0.9rem;
+}
+
+.comparison-table thead th {
+  padding: 20px 16px;
+  text-align: center;
+  font-weight: 700;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.comparison-table thead th:first-child {
+  background: var(--ink);
+  text-align: left;
+  width: 160px;
+  border-radius: var(--radius) 0 0 0;
+}
+
+.th-l1 { background: var(--accent); }
+.th-l2 { background: var(--blue); }
+.th-l3a { background: var(--green); }
+.th-l3b { background: var(--purple); border-radius: 0 var(--radius) 0 0; }
+
+.comparison-table thead th .th-sub {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 400;
+  opacity: 0.85;
+  margin-top: 4px;
+}
+
+.comparison-table tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--gray-200);
+  vertical-align: top;
+}
+
+.comparison-table tbody tr:last-child td { border-bottom: none; }
+
+.comparison-table tbody td:first-child {
+  font-weight: 700;
+  font-size: 0.85rem;
+  background: var(--gray-100);
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+.comparison-table tbody td:not(:first-child) {
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--gray-600);
+}
+
+.comparison-table .row-header {
+  background: var(--ink) !important;
+  color: #fff;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+.comparison-table .row-header td {
+  background: var(--ink) !important;
+  color: #fff;
+  font-weight: 700;
+  border-bottom: none;
+  padding: 10px 16px;
+}
+
+.cell-list {
+  list-style: none;
+  padding: 0;
+}
+
+.cell-list li {
+  padding: 3px 0;
+  padding-left: 16px;
+  position: relative;
+  font-size: 0.85rem;
+}
+
+.cell-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--gray-400);
+}
+
+.cell-highlight {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.hl-accent { background: var(--accent-light); color: var(--accent); }
+.hl-blue { background: var(--blue-light); color: var(--blue); }
+.hl-green { background: var(--green-light); color: var(--green); }
+.hl-purple { background: var(--purple-light); color: var(--purple); }
+
+/* ─── Journey Flow ─── */
+.journey-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+
+.jf-node {
+  text-align: center;
+  padding: 20px;
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: var(--shadow);
+  min-width: 160px;
+  max-width: 200px;
+}
+
+.jf-node h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.jf-node p {
+  font-size: 0.75rem;
+  color: var(--gray-600);
+}
+
+.jf-node.jf-l1 { border-top: 4px solid var(--accent); }
+.jf-node.jf-l2 { border-top: 4px solid var(--blue); }
+.jf-node.jf-l3a { border-top: 4px solid var(--green); }
+.jf-node.jf-l3b { border-top: 4px solid var(--purple); }
+
+.jf-arrow {
+  font-size: 1.5rem;
+  color: var(--gray-400);
+  padding: 0 8px;
+  flex: 0 0 auto;
+}
+
+.jf-split {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ─── Pricing ─── */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.pricing-card {
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.pricing-header {
+  padding: 24px 20px 16px;
+  color: #fff;
+}
+
+.pricing-header.ph-l1 { background: var(--accent); }
+.pricing-header.ph-l2 { background: var(--blue); }
+.pricing-header.ph-l3a { background: var(--green); }
+.pricing-header.ph-l3b { background: var(--purple); }
+
+.pricing-header h3 {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.pricing-header .price {
+  font-size: 1.6rem;
+  font-weight: 900;
+}
+
+.pricing-header .price-sub {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.pricing-body {
+  padding: 20px;
+  text-align: left;
+}
+
+.pricing-body ul {
+  list-style: none;
+  padding: 0;
+}
+
+.pricing-body li {
+  padding: 6px 0;
+  padding-left: 20px;
+  position: relative;
+  font-size: 0.85rem;
+  color: var(--gray-600);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.pricing-body li:last-child { border-bottom: none; }
+
+.pricing-body li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-weight: 700;
+}
+
+.pricing-note {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--gray-600);
+  padding: 20px;
+  background: var(--blue-light);
+  border-radius: var(--radius);
+  margin-bottom: 40px;
+}
+
+.pricing-note strong { color: var(--blue); }
+
+/* ─── Skill Map Table ─── */
+.skill-table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 60px;
+}
+
+.skill-table {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 0.85rem;
+}
+
+.skill-table thead th {
+  padding: 14px 16px;
+  text-align: center;
+  font-weight: 700;
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+.skill-table thead th:first-child {
+  background: var(--ink);
+  text-align: left;
+}
+
+.skill-table tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--gray-200);
+  text-align: center;
+}
+
+.skill-table tbody td:first-child {
+  text-align: left;
+  font-weight: 600;
+  background: var(--gray-100);
+}
+
+.skill-table tbody tr:last-child td { border-bottom: none; }
+
+.check { color: var(--green); font-weight: 700; font-size: 1.1rem; }
+.dash { color: var(--gray-200); }
+.new-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: #ffeaa7;
+  color: #d68910;
+}
+
+/* ─── CTA ─── */
+.cta-section {
+  text-align: center;
+  padding: 60px 24px;
+  background: linear-gradient(160deg, #1a1a2e, #2d3561);
+  color: #fff;
+  border-radius: var(--radius);
+  margin-bottom: 40px;
+}
+
+.cta-section h2 {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.cta-section p {
+  font-size: 1rem;
+  opacity: 0.8;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ─── Footer ─── */
+.footer {
+  padding: 40px 24px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--gray-400);
+}
+
+/* ─── Animation ─── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .jf-arrow { transform: rotate(90deg); }
+  .journey-flow { flex-direction: column; gap: 8px; }
+  .jf-split { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ Hero ═══ -->
+<section class="hero">
+  <span class="hero-badge">COURSE OVERVIEW</span>
+  <h1>Lark講座で<em>何が学べるか</em></h1>
+  <p class="hero-sub">
+    あなたの目的に合わせて選べる4つのレベル。<br>
+    ツールの使い方ではなく「仕事の仕組みを変える力」を身につける講座です。
+  </p>
+</section>
+
+<!-- ═══ Persona ═══ -->
+<div class="container">
+  <div class="fade-up">
+    <span class="section-tag tag-accent">YOUR GOAL</span>
+    <h2 class="section-title">あなたの目的はどれですか？</h2>
+    <p class="section-lead">受講者の目的は大きく3タイプ。目的に応じて最適なルートがあります。</p>
+  </div>
+
+  <div class="persona-grid fade-up">
+    <div class="persona-card p-self">
+      <div class="persona-icon">🏢</div>
+      <h3>自社の業務を仕組み化したい</h3>
+      <p>ツールがバラバラ、管理が属人的、何から手をつければいいか分からない。自分の仕事をLarkで整理し、業務が自然と回る状態を作りたい方。</p>
+      <span class="persona-route">→ レベル1 で達成</span>
+    </div>
+    <div class="persona-card p-biz">
+      <div class="persona-icon">🚀</div>
+      <h3>Larkで新しいビジネスを作りたい</h3>
+      <p>「これ、他の会社にもやってあげたい」「Lark構築を仕事にしたい」。他社の課題を解決する構築者として、営業・契約・サポートまでできるようになりたい方。</p>
+      <span class="persona-route">→ レベル2 → レベル3A</span>
+    </div>
+    <div class="persona-card p-tech">
+      <div class="persona-icon">⚡</div>
+      <h3>高度な技術で高単価案件を獲りたい</h3>
+      <p>APIやWebhook、AI連携で「Larkだけでは解決できない課題」に対応したい。外部システム統合のエキスパートとして活躍したい方。</p>
+      <span class="persona-route">→ レベル2 → レベル3B</span>
+    </div>
+  </div>
+
+  <!-- ═══ Journey ═══ -->
+  <div class="fade-up">
+    <span class="section-tag tag-blue">LEARNING PATH</span>
+    <h2 class="section-title">受講ルート</h2>
+    <p class="section-lead">全コースは積み上げ構造。前のレベルの成果物が次のレベルの土台になります。</p>
+  </div>
+
+  <div class="journey-flow fade-up">
+    <div class="jf-node jf-l1">
+      <h4>レベル1</h4>
+      <p>Lark Basic<br>基礎マスター</p>
+    </div>
+    <div class="jf-arrow">→</div>
+    <div class="jf-node jf-l2">
+      <h4>レベル2</h4>
+      <p>Builder<br>構築者コース</p>
+    </div>
+    <div class="jf-arrow">→</div>
+    <div class="jf-split">
+      <div class="jf-node jf-l3a">
+        <h4>レベル3A</h4>
+        <p>Consultant<br>クライアントコース</p>
+      </div>
+      <div class="jf-node jf-l3b">
+        <h4>レベル3B</h4>
+        <p>Expert<br>エキスパートコース</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Main Comparison Table ═══ -->
+  <div class="fade-up">
+    <span class="section-tag tag-accent">COMPARISON</span>
+    <h2 class="section-title">各コースで学べること 一覧</h2>
+    <p class="section-lead">レベルごとの対象者・ゴール・学ぶ内容・成果物を一目で比較できます。</p>
+  </div>
+
+  <div class="table-wrapper fade-up">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="th-l1">レベル1<span class="th-sub">Lark Basic</span></th>
+          <th class="th-l2">レベル2<span class="th-sub">Builder</span></th>
+          <th class="th-l3a">レベル3A<span class="th-sub">Consultant</span></th>
+          <th class="th-l3b">レベル3B<span class="th-sub">Expert</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- 基本情報 -->
+        <tr class="row-header"><td colspan="5">基本情報</td></tr>
+        <tr>
+          <td>対象者</td>
+          <td>1人社長・フリーランス・小規模事業者</td>
+          <td>他社支援・ビジネス展開を目指す方<br><span class="cell-highlight hl-blue">L1の内容を包括</span></td>
+          <td>構築力を収益化したい方</td>
+          <td>技術で高単価案件を獲りたい方</td>
+        </tr>
+        <tr>
+          <td>視座</td>
+          <td><span class="cell-highlight hl-accent">自分の仕事</span></td>
+          <td><span class="cell-highlight hl-blue">相手の組織</span></td>
+          <td><span class="cell-highlight hl-green">ビジネス</span></td>
+          <td><span class="cell-highlight hl-purple">技術の境界</span></td>
+        </tr>
+        <tr>
+          <td>期間</td>
+          <td>1ヶ月（全3〜4回）</td>
+          <td>3ヶ月（全12回）</td>
+          <td>3ヶ月</td>
+          <td>3ヶ月</td>
+        </tr>
+        <tr>
+          <td>ゴール</td>
+          <td>自社の業務をLarkで仕組み化できる</td>
+          <td>他社の業務を設計・構築・納品できる</td>
+          <td>案件獲得から定着支援まで一人でできる</td>
+          <td>外部連携・AI統合で高単価案件を受注できる</td>
+        </tr>
+
+        <!-- 学べるLark機能 -->
+        <tr class="row-header"><td colspan="5">学べるLark機能</td></tr>
+        <tr>
+          <td>基本機能</td>
+          <td>
+            <ul class="cell-list">
+              <li>メッセンジャー</li>
+              <li>カレンダー</li>
+              <li>ドキュメント・Wiki</li>
+              <li>タスク管理</li>
+            </ul>
+          </td>
+          <td>L1の内容を速習で復習</td>
+          <td>―</td>
+          <td>―</td>
+        </tr>
+        <tr>
+          <td>Base（データベース）</td>
+          <td>
+            <ul class="cell-list">
+              <li>テーブル設計</li>
+              <li>ルックアップ</li>
+              <li>双方向関連</li>
+              <li>ビュー設計</li>
+              <li>ダッシュボード</li>
+            </ul>
+          </td>
+          <td>L1の基礎を前提に、組織向けの複合設計</td>
+          <td>クライアント向けデモ用の設計</td>
+          <td>
+            <ul class="cell-list">
+              <li><span class="new-badge">NEW</span> 正規化理論</li>
+              <li><span class="new-badge">NEW</span> 大規模データ運用</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>自動化</td>
+          <td>
+            <ul class="cell-list">
+              <li>通知・リマインド</li>
+              <li>レコード追加時の処理</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="cell-list">
+              <li><span class="new-badge">NEW</span> 条件分岐</li>
+              <li><span class="new-badge">NEW</span> 承認トリガー連動</li>
+              <li><span class="new-badge">NEW</span> 複数テーブル連動</li>
+            </ul>
+          </td>
+          <td>―</td>
+          <td>
+            <ul class="cell-list">
+              <li><span class="new-badge">NEW</span> 外部サービス連動</li>
+              <li><span class="new-badge">NEW</span> AI自動処理</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>組織向け機能</td>
+          <td>―<br><small style="color:var(--gray-400)">1人利用に特化</small></td>
+          <td>
+            <ul class="cell-list">
+              <li><span class="new-badge">NEW</span> 承認フロー</li>
+              <li><span class="new-badge">NEW</span> ワークプレイス</li>
+              <li><span class="new-badge">NEW</span> 権限設計</li>
+              <li><span class="new-badge">NEW</span> 組織チャット設計</li>
+              <li><span class="new-badge">NEW</span> 管理コンソール</li>
+            </ul>
+          </td>
+          <td>―</td>
+          <td>―</td>
+        </tr>
+
+        <!-- 学べるスキル -->
+        <tr class="row-header"><td colspan="5">学べるスキル</td></tr>
+        <tr>
+          <td>設計力</td>
+          <td>自社の業務フローを設計</td>
+          <td>他社の業務フローを設計<br>要件定義書・項目定義書を作成</td>
+          <td>サービスメニュー・価格表の設計</td>
+          <td>システム統合のアーキテクチャ設計</td>
+        </tr>
+        <tr>
+          <td>ヒアリング力</td>
+          <td>―</td>
+          <td>
+            <ul class="cell-list">
+              <li><span class="new-badge">NEW</span> 課題の引き出し方</li>
+              <li><span class="new-badge">NEW</span> As-Is / To-Be 整理</li>
+            </ul>
+          </td>
+          <td>営業ヒアリングとして深化</td>
+          <td>技術要件のヒアリング</td>
+        </tr>
+        <tr>
+          <td>提案・構築力</td>
+          <td>―</td>
+          <td>
+            <ul class="cell-list">
+              <li><span class="new-badge">NEW</span> 業種別構築パターン</li>
+              <li><span class="new-badge">NEW</span> 模擬案件で実践</li>
+              <li><span class="new-badge">NEW</span> 段階的導入設計</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="cell-list">
+              <li><span class="new-badge">NEW</span> 提案書作成</li>
+              <li><span class="new-badge">NEW</span> デモンストレーション</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="cell-list">
+              <li><span class="new-badge">NEW</span> API / Webhook設計</li>
+              <li><span class="new-badge">NEW</span> 技術提案書</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>ビジネススキル</td>
+          <td>―</td>
+          <td>―</td>
+          <td>
+            <ul class="cell-list">
+              <li><span class="new-badge">NEW</span> 営業・リード獲得</li>
+              <li><span class="new-badge">NEW</span> クロージング</li>
+              <li><span class="new-badge">NEW</span> 契約書・価格設定</li>
+              <li><span class="new-badge">NEW</span> 定着支援</li>
+              <li><span class="new-badge">NEW</span> 月額サポート設計</li>
+            </ul>
+          </td>
+          <td>―</td>
+        </tr>
+        <tr>
+          <td>技術スキル</td>
+          <td>―</td>
+          <td>―</td>
+          <td>―</td>
+          <td>
+            <ul class="cell-list">
+              <li><span class="new-badge">NEW</span> Lark Open API</li>
+              <li><span class="new-badge">NEW</span> Google Apps Script連携</li>
+              <li><span class="new-badge">NEW</span> Webhook</li>
+              <li><span class="new-badge">NEW</span> MCP（AI連携）</li>
+              <li><span class="new-badge">NEW</span> Make / Zapier</li>
+            </ul>
+          </td>
+        </tr>
+
+        <!-- 成果物 -->
+        <tr class="row-header"><td colspan="5">修了時の成果物</td></tr>
+        <tr>
+          <td>手に入るもの</td>
+          <td>
+            <ul class="cell-list">
+              <li>自社の業務システム</li>
+              <li>業務設計図</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="cell-list">
+              <li>模擬案件の構築済み環境</li>
+              <li>要件定義書・項目定義書</li>
+              <li>納品資料一式</li>
+              <li>構築者ポートフォリオ</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="cell-list">
+              <li>サービスメニュー・価格表</li>
+              <li>契約書テンプレート</li>
+              <li>実案件の受注実績</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="cell-list">
+              <li>外部連携システム</li>
+              <li>技術ポートフォリオ</li>
+              <li>API連携テンプレート</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══ Lark Feature Scope ═══ -->
+  <div class="fade-up">
+    <span class="section-tag tag-blue">SKILL MAP</span>
+    <h2 class="section-title">Lark機能 習得マップ</h2>
+    <p class="section-lead">どのレベルでどの機能を学ぶのか、一目で確認できます。</p>
+  </div>
+
+  <div class="skill-table-wrapper fade-up">
+    <table class="skill-table">
+      <thead>
+        <tr>
+          <th style="background:var(--ink)">Lark機能</th>
+          <th class="th-l1">L1</th>
+          <th class="th-l2">L2</th>
+          <th class="th-l3a">L3A</th>
+          <th class="th-l3b">L3B</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>メッセンジャー（個人）</td><td class="check">●</td><td class="dash">―</td><td class="dash">―</td><td class="dash">―</td></tr>
+        <tr><td>カレンダー（個人）</td><td class="check">●</td><td class="dash">―</td><td class="dash">―</td><td class="dash">―</td></tr>
+        <tr><td>ドキュメント・Wiki</td><td class="check">●</td><td class="dash">―</td><td class="dash">―</td><td class="dash">―</td></tr>
+        <tr><td>Base（テーブル・ルックアップ・関連）</td><td class="check">●</td><td class="dash">―</td><td class="dash">―</td><td class="dash">―</td></tr>
+        <tr><td>ビュー・ダッシュボード</td><td class="check">●</td><td class="dash">―</td><td class="dash">―</td><td class="dash">―</td></tr>
+        <tr><td>基礎自動化（通知・リマインド）</td><td class="check">●</td><td class="dash">―</td><td class="dash">―</td><td class="dash">―</td></tr>
+        <tr><td>タスク管理</td><td class="check">●</td><td class="dash">―</td><td class="dash">―</td><td class="dash">―</td></tr>
+        <tr><td>承認フロー</td><td class="dash">―</td><td class="check">●</td><td class="dash">―</td><td class="dash">―</td></tr>
+        <tr><td>ワークプレイス</td><td class="dash">―</td><td class="check">●</td><td class="dash">―</td><td class="dash">―</td></tr>
+        <tr><td>権限設計（部門別・役職別）</td><td class="dash">―</td><td class="check">●</td><td class="dash">―</td><td class="dash">―</td></tr>
+        <tr><td>組織チャット設計</td><td class="dash">―</td><td class="check">●</td><td class="dash">―</td><td class="dash">―</td></tr>
+        <tr><td>管理コンソール</td><td class="dash">―</td><td class="check">●</td><td class="dash">―</td><td class="dash">―</td></tr>
+        <tr><td>条件分岐・複合自動化</td><td class="dash">―</td><td class="check">●</td><td class="dash">―</td><td class="dash">―</td></tr>
+        <tr><td>営業・提案・契約</td><td class="dash">―</td><td class="dash">―</td><td class="check">●</td><td class="dash">―</td></tr>
+        <tr><td>定着支援・月額サポート</td><td class="dash">―</td><td class="dash">―</td><td class="check">●</td><td class="dash">―</td></tr>
+        <tr><td>Lark Open API</td><td class="dash">―</td><td class="dash">―</td><td class="dash">―</td><td class="check">●</td></tr>
+        <tr><td>Webhook・GAS連携</td><td class="dash">―</td><td class="dash">―</td><td class="dash">―</td><td class="check">●</td></tr>
+        <tr><td>MCP（AI連携）</td><td class="dash">―</td><td class="dash">―</td><td class="dash">―</td><td class="check">●</td></tr>
+        <tr><td>Make / Zapier連携</td><td class="dash">―</td><td class="dash">―</td><td class="dash">―</td><td class="check">●</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══ Pricing ═══ -->
+  <div class="fade-up">
+    <span class="section-tag tag-accent">PRICING</span>
+    <h2 class="section-title">料金体系</h2>
+    <p class="section-lead">各コースの料金と、含まれるサポート内容。</p>
+  </div>
+
+  <div class="pricing-grid fade-up">
+    <div class="pricing-card">
+      <div class="pricing-header ph-l1">
+        <h3>レベル1：Lark Basic</h3>
+        <div class="price">¥198,000</div>
+        <div class="price-sub">1ヶ月 / 全3〜4回</div>
+      </div>
+      <div class="pricing-body">
+        <ul>
+          <li>週1回のライブ講義</li>
+          <li>Lark基本機能の実践習得</li>
+          <li>自社の業務システム構築</li>
+          <li>修了発表会</li>
+          <li>チャットサポート</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-header ph-l2">
+        <h3>レベル2：Builder</h3>
+        <div class="price">¥598,000</div>
+        <div class="price-sub">3ヶ月 / 全12回（L1内容を包括）</div>
+      </div>
+      <div class="pricing-body">
+        <ul>
+          <li>レベル1の全内容を包括</li>
+          <li>組織向け機能の完全習得</li>
+          <li>ヒアリング・要件定義・構築の実践</li>
+          <li>模擬案件での納品プレゼン</li>
+          <li>月1回の個別面談</li>
+          <li>構築者ポートフォリオ完成</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-header ph-l3a">
+        <h3>レベル3A：Consultant</h3>
+        <div class="price">¥400,000〜</div>
+        <div class="price-sub">3ヶ月</div>
+      </div>
+      <div class="pricing-body">
+        <ul>
+          <li>営業導線・リード獲得</li>
+          <li>提案書作成・デモ実施</li>
+          <li>契約書・価格設定</li>
+          <li>定着支援・月額サポート設計</li>
+          <li>実案件での受注実績</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-header ph-l3b">
+        <h3>レベル3B：Expert</h3>
+        <div class="price">¥400,000〜</div>
+        <div class="price-sub">3ヶ月</div>
+      </div>
+      <div class="pricing-body">
+        <ul>
+          <li>Lark Open API / OAuth認証</li>
+          <li>GAS・Webhook連携</li>
+          <li>MCP（AI統合）</li>
+          <li>Make / Zapier連携</li>
+          <li>大規模データ運用</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="pricing-note fade-up">
+    <strong>お得な受講ルート：</strong>最初からレベル2（¥598,000）を購入すると、レベル1→2と進む場合より<strong>¥100,000お得</strong>です。<br>
+    レベル1受講後にレベル2へ進む場合は、差額＋¥100,000でアップグレード可能です。
+  </div>
+
+  <!-- ═══ CTA ═══ -->
+  <div class="cta-section fade-up">
+    <h2>「仕事が流れる状態」を<br>一緒に作りませんか？</h2>
+    <p>
+      Lark講座は、ツールの使い方を教える場所ではありません。<br>
+      あなたの仕事の構造を変え、本来やるべき仕事に熱狂できる時間を届ける場所です。
+    </p>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>Lark講座 コース全体像</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
