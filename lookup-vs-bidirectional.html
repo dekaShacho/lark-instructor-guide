@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ルックアップと双方向関連の違い｜Lark Base</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f4ef;
+  --ink: #1c1917;
+  --muted: #57534e;
+  --line: #d6d3cd;
+  --cust: #0f766e;
+  --cust-bg: #ccfbf1;
+  --case: #7c3aed;
+  --case-bg: #ede9fe;
+  --lookup: #ea580c;
+  --lookup-bg: #ffedd5;
+  --link: #0369a1;
+  --shadow: 0 12px 40px rgba(28, 25, 23, 0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+  min-height: 100vh;
+}
+
+.wrap {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 48px 20px 72px;
+}
+
+h1 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.sub {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 38em;
+  margin-bottom: 40px;
+}
+
+/* Legend pills */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin-bottom: 36px;
+}
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.legend i {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+.legend .l-bi { background: var(--link); }
+.legend .l-lu { background: var(--lookup); }
+
+/* Main diagram */
+.diagram {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  padding: 32px 24px 40px;
+  margin-bottom: 40px;
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+
+.diagram::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--cust), var(--link), var(--lookup), var(--case));
+}
+
+.tables-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+@media (min-width: 720px) {
+  .tables-row {
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0 8px;
+    align-items: center;
+  }
+}
+
+.table-card {
+  border-radius: 14px;
+  padding: 18px 16px;
+  border: 2px solid;
+  position: relative;
+}
+
+.table-card.customer {
+  border-color: var(--cust);
+  background: linear-gradient(180deg, #ecfeff 0%, #fff 40%);
+}
+
+.table-card.case {
+  border-color: var(--case);
+  background: linear-gradient(180deg, #faf5ff 0%, #fff 40%);
+}
+
+.table-card h3 {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.table-card.customer h3 { color: var(--cust); }
+.table-card.case h3 { color: var(--case); }
+
+.table-card h3::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.rows {
+  font-size: 13px;
+}
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid var(--line);
+}
+.row.lookup-row {
+  border-color: var(--lookup);
+  background: var(--lookup-bg);
+  border-width: 2px;
+  border-style: dashed;
+  position: relative;
+}
+.row.lookup-row::after {
+  content: "ルックアップ";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--lookup);
+  letter-spacing: 0.06em;
+}
+
+.row .k { color: var(--muted); font-size: 11px; }
+.row .v { font-weight: 600; }
+
+/* Center: bidirectional */
+.bridge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 0;
+  min-height: 120px;
+}
+
+@media (min-width: 720px) {
+  .bridge { padding: 0 4px; min-height: auto; }
+}
+
+.bridge-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--link);
+  letter-spacing: 0.14em;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.svg-wrap {
+  width: 100%;
+  max-width: 200px;
+  height: 100px;
+}
+
+@media (min-width: 720px) {
+  .svg-wrap { max-width: 120px; height: 140px; }
+}
+
+/* Flow arrows for lookup */
+.flow-lookup {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px dashed var(--line);
+}
+
+.flow-lookup h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--lookup);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.flow-lookup h4::before {
+  content: "②";
+  width: 24px;
+  height: 24px;
+  background: var(--lookup);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.flow-steps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 6px;
+  font-size: 13px;
+}
+
+.flow-steps .step {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+.flow-steps .step.hl {
+  border-color: var(--lookup);
+  background: var(--lookup-bg);
+}
+.flow-steps .arrow {
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.bi-step-label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.bi-step-label strong { color: var(--link); }
+
+/* Comparison cards */
+.compare {
+  display: grid;
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .compare { grid-template-columns: 1fr 1fr; }
+}
+
+.cp {
+  padding: 22px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+}
+.cp.bi { background: linear-gradient(135deg, #e0f2fe 0%, #fff 50%); border-color: #7dd3fc; }
+.cp.lu { background: linear-gradient(135deg, #ffedd5 0%, #fff 50%); border-color: #fdba74; }
+.cp h3 {
+  font-size: 15px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.cp.bi h3 { color: var(--link); }
+.cp.lu h3 { color: var(--lookup); }
+.cp p { font-size: 14px; color: var(--muted); }
+.cp .one {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-top: 12px;
+  padding: 12px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 8px;
+  border-left: 4px solid currentColor;
+}
+.cp.bi .one { border-left-color: var(--link); }
+.cp.lu .one { border-left-color: var(--lookup); }
+
+footer {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--muted);
+}
+footer a { color: var(--link); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>ルックアップと<br>双方向関連の違い</h1>
+  <p class="sub">Lark講座で使っている言葉の整理です。<strong>同じ種類の機能の二択ではなく</strong>、「つながりの形」と「値の表示」という<strong>レイヤーが違います</strong>。</p>
+
+  <div class="legend">
+    <span><i class="l-bi"></i> 双方向関連（両側から辿れる道）</span>
+    <span><i class="l-lu"></i> ルックアップ（道の先の値を写す）</span>
+  </div>
+
+  <div class="diagram">
+    <p class="bi-step-label" style="margin-bottom:20px;"><strong>① 双方向関連</strong>：顧客レコード ⇄ 案件レコードのあいだに「行き来できる道」ができる</p>
+
+    <div class="tables-row">
+      <div class="table-card customer">
+        <h3>顧客マスタ</h3>
+        <div class="rows">
+          <div class="row">
+            <span class="k">会社名</span><span class="v">株式会社サンプル</span>
+          </div>
+          <div class="row">
+            <span class="k">電話</span><span class="v">03-1234-5678</span>
+          </div>
+          <div class="row" style="border-style:dashed;border-color:var(--link);background:#f0f9ff;">
+            <span class="k" style="grid-column:1/-1;color:var(--link);font-weight:700;">↓ ここから紐づく案件を一覧表示（双方向の「戻り」）</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bridge">
+        <div class="bridge-label">双方向</div>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 120 160" width="100%" height="100%" aria-hidden="true">
+            <defs>
+              <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 z" fill="#0369a1"/>
+              </marker>
+            </defs>
+            <path d="M60 20 L60 70" stroke="#0369a1" stroke-width="3" fill="none" marker-end="url(#arr)"/>
+            <path d="M60 140 L60 90" stroke="#0369a1" stroke-width="3" fill="none" marker-end="url(#arr)"/>
+            <rect x="18" y="72" width="84" height="36" rx="8" fill="#e0f2fe" stroke="#0369a1" stroke-width="2"/>
+            <text x="60" y="94" text-anchor="middle" font-size="11" font-family="Noto Sans JP, sans-serif" font-weight="700" fill="#0369a1">関連レコード</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="table-card case">
+        <h3>案件テーブル</h3>
+        <div class="rows">
+          <div class="row">
+            <span class="k">案件名</span><span class="v">Webサイト刷新</span>
+          </div>
+          <div class="row" style="border-color:var(--link);background:#f0f9ff;">
+            <span class="k">顧客（関連）</span><span class="v" style="color:var(--link);">株式会社サンプル</span>
+          </div>
+          <div class="row lookup-row">
+            <span class="k">顧客名</span><span class="v">株式会社サンプル</span>
+            <span class="k" style="grid-column:1/-1;margin-top:4px;">電話（表示）</span><span class="v" style="grid-column:1/-1;">03-1234-5678</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-lookup">
+      <h4>ルックアップがすること</h4>
+      <div class="flow-steps">
+        <span class="step">関連レコードで「どの顧客か」が決まる</span>
+        <span class="arrow">→</span>
+        <span class="step hl">ルックアップで電話番号などを<strong>列として表示</strong></span>
+        <span class="arrow">→</span>
+        <span class="step">二重入力なし・集計ビューでも使える</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="compare">
+    <div class="cp bi">
+      <h3>双方向関連</h3>
+      <p>テーブル同士の<strong>リレーションの形</strong>。「顧客から案件一覧」「案件から顧客へ戻る」がスムーズになる。</p>
+      <p class="one">イメージ：<strong>地図でいう「行き来できる道」</strong></p>
+    </div>
+    <div class="cp lu">
+      <h3>ルックアップ</h3>
+      <p>すでにある<strong>関連レコード</strong>を通じて、<strong>別テーブルの特定フィールドの値</strong>を、この表に<strong>もう1列として見せる</strong>仕組み。</p>
+      <p class="one">イメージ：<strong>道の先の看板の文字を、こちらの画面にも写す</strong></p>
+    </div>
+  </div>
+
+  <div style="margin-top:28px;padding:20px;background:#fff;border-radius:14px;border:1px solid var(--line);font-size:14px;">
+    <strong style="display:block;margin-bottom:8px;">覚えておくとよいこと</strong>
+    <ul style="margin-left:1.2em;color:var(--muted);">
+      <li style="margin-bottom:6px;">ルックアップ<strong>だけ</strong>では「つなぎ」は生まれない → 先に<strong>関連レコード</strong>（双方向の設定含む）が必要。</li>
+      <li>実務では <strong>双方向の関連 ＋ 必要な列をルックアップ</strong> でセットにすることが多い。</li>
+    </ul>
+  </div>
+
+  <footer>
+    <p>Lark講座 · 講師・受講生向け補助資料</p>
+    <p style="margin-top:8px;"><a href="index.html">講師向けポータル</a> · <a href="curriculum-map.html">カリキュラムマップ</a></p>
+  </footer>
+</div>
+</body>
+</html>

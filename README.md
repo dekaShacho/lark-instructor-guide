@@ -9,6 +9,7 @@
 | **講師向けポータル（メイン）** | https://dekashacho.github.io/lark-instructor-guide/ |
 | **L1〜L3 動画・課題マップ** | https://dekashacho.github.io/lark-instructor-guide/curriculum-map.html |
 | **受講生向けコース全体像** | https://dekashacho.github.io/lark-instructor-guide/course-overview.html |
+| **ルックアップと双方向関連（インフォグラフィック）** | https://dekashacho.github.io/lark-instructor-guide/lookup-vs-bidirectional.html |
 
 ## リポジトリ内ドキュメント（GitHub上で閲覧）
 
