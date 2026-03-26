@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L1〜L3 動画・課題マップ｜Lark講座</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f1419;
+  --bg-card: #1a222d;
+  --bg-elevated: #232d3b;
+  --text: #e8ecf1;
+  --text-muted: #8b98a8;
+  --line: #2f3d4d;
+  --l1: #3d9a7a;
+  --l1-dim: rgba(61, 154, 122, 0.15);
+  --l2: #5b8fd9;
+  --l2-dim: rgba(91, 143, 217, 0.15);
+  --l3a: #d4a84b;
+  --l3a-dim: rgba(212, 168, 75, 0.12);
+  --l3b: #c76b9a;
+  --l3b-dim: rgba(199, 107, 154, 0.12);
+  --lib: #6b7c8f;
+  --accent: #e8ecf1;
+  --radius: 12px;
+  --font-display: "DM Serif Display", "Noto Sans JP", serif;
+  --font-body: "Noto Sans JP", sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  font-size: 15px;
+}
+
+/* noise overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  background: rgba(15, 20, 25, 0.92);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+}
+nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+nav a:hover { color: var(--text); }
+
+.hero {
+  min-height: 72vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 100px 8vw 60px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  right: -5%;
+  width: min(55vw, 520px);
+  height: min(55vw, 520px);
+  background: radial-gradient(circle, var(--l2-dim) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-label {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.15;
+  max-width: 14ch;
+  margin-bottom: 20px;
+}
+.hero p {
+  max-width: 36em;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-top: 32px;
+}
+.hero-meta span {
+  border: 1px solid var(--line);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.hero-meta strong { color: var(--text); font-weight: 600; }
+
+section {
+  padding: 72px 8vw 88px;
+  border-top: 1px solid var(--line);
+}
+section h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  margin-bottom: 8px;
+}
+.section-lead {
+  color: var(--text-muted);
+  max-width: 42em;
+  margin-bottom: 40px;
+}
+
+/* Journey flow */
+.flow-wrap {
+  display: grid;
+  gap: 24px;
+  margin-top: 32px;
+}
+@media (min-width: 900px) {
+  .flow-wrap { grid-template-columns: 1fr auto 1fr auto 1.2fr; align-items: stretch; }
+}
+.flow-node {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  position: relative;
+}
+.flow-node h3 {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+.flow-node.l1 { border-left: 4px solid var(--l1); }
+.flow-node.l2 { border-left: 4px solid var(--l2); }
+.flow-node.l3a { border-left: 4px solid var(--l3a); }
+.flow-node.l3b { border-left: 4px solid var(--l3b); }
+.flow-node small { display: block; color: var(--text-muted); font-size: 12px; margin-top: 8px; line-height: 1.5; }
+.flow-arrow {
+  display: none;
+  align-self: center;
+  color: var(--text-muted);
+  font-size: 22px;
+  font-weight: 300;
+}
+@media (min-width: 900px) {
+  .flow-arrow { display: block; }
+}
+.split-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+@media (min-width: 600px) {
+  .split-3 { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+/* Library vs course */
+.dual-grid {
+  display: grid;
+  gap: 20px;
+}
+@media (min-width: 768px) {
+  .dual-grid { grid-template-columns: 1fr 1.35fr; }
+}
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 28px;
+  border: 1px solid var(--line);
+}
+.card.lib { background: linear-gradient(145deg, var(--bg-elevated) 0%, var(--bg-card) 100%); border-color: #3d4a5c; }
+.card.course { border-color: var(--l2); box-shadow: 0 0 0 1px rgba(91, 143, 217, 0.08); }
+.card h3 { font-size: 18px; margin-bottom: 12px; }
+.card p { color: var(--text-muted); font-size: 14px; margin-bottom: 16px; }
+.big-num {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--accent);
+}
+.big-num span { font-size: 1rem; color: var(--text-muted); font-family: var(--font-body); margin-left: 6px; }
+
+/* Bar chart */
+.chart {
+  margin-top: 32px;
+}
+.chart-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 48px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.chart-row .label { font-size: 13px; font-weight: 600; }
+.chart-row.l1 .label { color: var(--l1); }
+.chart-row.l2 .label { color: var(--l2); }
+.chart-row.l3a .label { color: var(--l3a); }
+.chart-row.l3b .label { color: var(--l3b); }
+.bar-bg {
+  height: 28px;
+  background: var(--bg-elevated);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.chart-row.l1 .bar-fill { background: linear-gradient(90deg, var(--l1), #2d7a62); width: 0; }
+.chart-row.l2 .bar-fill { background: linear-gradient(90deg, var(--l2), #3d6dad); width: 0; }
+.chart-row.l3a .bar-fill { background: linear-gradient(90deg, var(--l3a), #a67c2e); width: 0; }
+.chart-row.l3b .bar-fill { background: linear-gradient(90deg, var(--l3b), #954d78); width: 0; }
+/* バー幅：最大34本（L1）を100% */
+.chart-row.animated .bar-fill.l1w { width: 100%; }
+.chart-row.animated .bar-fill.l2w { width: 94.12%; }
+.chart-row.animated .bar-fill.l3aw { width: 79.41%; }
+.chart-row.animated .bar-fill.l3bw { width: 82.35%; }
+.chart-val { font-size: 13px; color: var(--text-muted); text-align: right; }
+
+/* L1 timeline */
+.weeks {
+  display: grid;
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .weeks { grid-template-columns: repeat(4, 1fr); }
+}
+.week-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  border-top: 3px solid var(--l1);
+  position: relative;
+  overflow: hidden;
+}
+.week-card::before {
+  content: attr(data-w);
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  opacity: 0.07;
+  line-height: 1;
+}
+.week-card h4 { font-size: 13px; color: var(--l1); letter-spacing: 0.08em; margin-bottom: 8px; }
+.week-card .theme { font-weight: 600; font-size: 15px; margin-bottom: 12px; line-height: 1.4; }
+.week-card .stats { font-size: 12px; color: var(--text-muted); }
+.week-card .stats strong { color: var(--text); }
+.week-card .hw {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+  font-size: 12px;
+  color: var(--l1);
+}
+
+/* L2 months */
+.months {
+  display: grid;
+  gap: 20px;
+}
+@media (min-width: 900px) {
+  .months { grid-template-columns: repeat(3, 1fr); }
+}
+.month-pillar {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  padding: 24px;
+  border-top: 4px solid var(--l2);
+}
+.month-pillar h4 { color: var(--l2); font-size: 13px; letter-spacing: 0.1em; margin-bottom: 6px; }
+.month-pillar .title { font-weight: 700; font-size: 17px; margin-bottom: 16px; }
+.month-pillar ul { list-style: none; font-size: 13px; color: var(--text-muted); }
+.month-pillar li { padding: 6px 0; border-bottom: 1px solid var(--line); }
+.month-pillar li:last-child { border-bottom: 0; }
+.month-pillar .vid { float: right; color: var(--l2); font-weight: 600; }
+
+/* L3 duo */
+.l3duo {
+  display: grid;
+  gap: 20px;
+}
+@media (min-width: 768px) {
+  .l3duo { grid-template-columns: 1fr 1fr; }
+}
+.l3box {
+  border-radius: var(--radius);
+  padding: 28px;
+  border: 1px solid var(--line);
+}
+.l3box.a { background: linear-gradient(160deg, var(--l3a-dim) 0%, var(--bg-card) 45%); border-color: rgba(212, 168, 75, 0.35); }
+.l3box.b { background: linear-gradient(160deg, var(--l3b-dim) 0%, var(--bg-card) 45%); border-color: rgba(199, 107, 154, 0.35); }
+.l3box h3 { font-size: 20px; margin-bottom: 8px; }
+.l3box.a h3 { color: var(--l3a); }
+.l3box.b h3 { color: var(--l3b); }
+.l3box .sub { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+.l3box dl { display: grid; gap: 10px; font-size: 13px; }
+.l3box dt { color: var(--text-muted); }
+.l3box dd { font-weight: 500; }
+
+/* Summary table */
+.sum-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin-top: 24px;
+}
+.sum-table th, .sum-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+.sum-table th { color: var(--text-muted); font-weight: 500; font-size: 12px; letter-spacing: 0.06em; }
+.sum-table tr:hover td { background: var(--bg-elevated); }
+
+footer {
+  padding: 40px 8vw 60px;
+  border-top: 1px solid var(--line);
+  color: var(--text-muted);
+  font-size: 13px;
+}
+footer a { color: var(--l2); }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#journey">全体像</a>
+  <a href="#library">ライブラリ</a>
+  <a href="#l1">レベル1</a>
+  <a href="#l2">レベル2</a>
+  <a href="#l3">レベル3</a>
+  <a href="#summary">集計</a>
+</nav>
+
+<header class="hero">
+  <p class="hero-label">Curriculum map</p>
+  <h1>動画と課題の<br>地形図</h1>
+  <p>L1〜L3の講座専用動画・課題・ライブの関係を、一枚の地図として俯瞰するビジュアルです。詳細な表は <code style="font-size:0.9em;opacity:0.8">L1-L3_動画・課題統合マスター.md</code> を参照してください。</p>
+  <div class="hero-meta">
+    <span>講座専用動画 <strong>121本</strong>（L3は案）</span>
+    <span>補助ライブラリ <strong>40本</strong></span>
+    <span>ソース <strong>統合マスター</strong></span>
+  </div>
+</header>
+
+<section id="journey">
+  <h2 class="reveal">受講ジャーニー</h2>
+  <p class="section-lead reveal">視座が「自分 → 相手の組織 → ビジネス or 技術」へと段階的に上がる流れ。</p>
+  <div class="flow-wrap reveal">
+    <div class="flow-node l1">
+      <h3>LEVEL 1</h3>
+      <p style="font-size:14px;color:var(--text-muted);">1ヶ月 · ¥198,000〜</p>
+      <p style="margin-top:10px;font-size:14px;">自分の業務をLarkに載せ切る。動画34本・課題4・ライブ1。</p>
+      <small>次の壁：組織向け機能・他社提案へのギャップ</small>
+    </div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-node l2">
+      <h3>LEVEL 2</h3>
+      <p style="font-size:14px;color:var(--text-muted);">3ヶ月 · ¥598,000〜（L1包括可）</p>
+      <p style="margin-top:10px;font-size:14px;">承認・ワークプレイス・権限・要件定義〜模擬納品。動画32本・課題11・ライブ2。</p>
+      <small>次の壁：案件獲得・契約 <em>or</em> 外部連携・高単価技術</small>
+    </div>
+    <span class="flow-arrow">→</span>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div class="flow-node l3a">
+        <h3>LEVEL 3A</h3>
+        <p style="font-size:14px;color:var(--text-muted);">3ヶ月 · クライアントコース</p>
+        <p style="margin-top:8px;font-size:14px;">営業・提案・契約・定着。動画27本（案）。</p>
+      </div>
+      <div class="flow-node l3b">
+        <h3>LEVEL 3B</h3>
+        <p style="font-size:14px;color:var(--text-muted);">3ヶ月 · エキスパートコース</p>
+        <p style="margin-top:8px;font-size:14px;">API・GAS・Webhook・MCP。動画28本（案）。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="library">
+  <h2 class="reveal">二層の動画構造</h2>
+  <p class="section-lead reveal">既存の機能別チュートリアル（40本）と、講座の課題と直結する専用動画を混同しない。</p>
+  <div class="dual-grid reveal">
+    <div class="card lib">
+      <h3 style="color:var(--lib);">汎用ライブラリ</h3>
+      <div class="big-num">40<span>本</span></div>
+      <p>導入・チャット・タスク・Wiki・会議・カレンダー・Docs・フォーム・Base汎用・メール・承認など。操作の辞書。</p>
+      <p style="font-size:13px;margin-bottom:0;"><strong style="color:var(--text);">位置づけ</strong>：補助教材（必須視聴の対象外）</p>
+    </div>
+    <div class="card course">
+      <h3 style="color:var(--l2);">講座専用マスター</h3>
+      <div class="big-num">121<span>本</span></div>
+      <p>L1の設計思考・課題連動、L2の組織構築・模擬案件、L3Aのビジネス、L3Bの統合技術。撮影・採点の管理単位。</p>
+      <p style="font-size:13px;margin-bottom:0;"><strong style="color:var(--text);">位置づけ</strong>：必須視聴＋課題と1対1で紐づく</p>
+    </div>
+  </div>
+
+  <div class="chart reveal" id="chart-block">
+    <h3 style="font-size:16px;margin-bottom:20px;color:var(--text-muted);letter-spacing:0.1em;">講座専用動画本数（相対比較・最大を100%）</h3>
+    <div class="chart-row l1" data-bar>
+      <span class="label">L1</span>
+      <div class="bar-bg"><div class="bar-fill l1w"></div></div>
+      <span class="chart-val">34</span>
+    </div>
+    <div class="chart-row l2" data-bar>
+      <span class="label">L2</span>
+      <div class="bar-bg"><div class="bar-fill l2w"></div></div>
+      <span class="chart-val">32</span>
+    </div>
+    <div class="chart-row l3a" data-bar>
+      <span class="label">L3A</span>
+      <div class="bar-bg"><div class="bar-fill l3aw"></div></div>
+      <span class="chart-val">27</span>
+    </div>
+    <div class="chart-row l3b" data-bar>
+      <span class="label">L3B</span>
+      <div class="bar-bg"><div class="bar-fill l3bw"></div></div>
+      <span class="chart-val">28</span>
+    </div>
+  </div>
+</section>
+
+<section id="l1">
+  <h2 class="reveal">レベル1 · 4ブロック</h2>
+  <p class="section-lead reveal">全動画化・細分化34本。ライブは<strong>修了発表会のみ</strong>。</p>
+  <div class="weeks reveal">
+    <div class="week-card" data-w="01">
+      <h4>BLOCK 1</h4>
+      <p class="theme">課題整理 &amp; Lark環境構築</p>
+      <p class="stats">動画 <strong>12本</strong> · 約56分</p>
+      <p class="hw">課題① 業務課題マップ</p>
+    </div>
+    <div class="week-card" data-w="02">
+      <h4>BLOCK 2</h4>
+      <p class="theme">Base設計 &amp; 構築</p>
+      <p class="stats">動画 <strong>11本</strong> · 約57分</p>
+      <p class="hw">課題② 自社Base（関連付き）</p>
+    </div>
+    <div class="week-card" data-w="03">
+      <h4>BLOCK 3</h4>
+      <p class="theme">見える化 &amp; 基礎自動化</p>
+      <p class="stats">動画 <strong>9本</strong> · 約39分</p>
+      <p class="hw">課題③ ビュー3+ダッシュボード+自動化</p>
+    </div>
+    <div class="week-card" data-w="04">
+      <h4>BLOCK 4</h4>
+      <p class="theme">修了 · 発表</p>
+      <p class="stats">動画 <strong>2本</strong> · 約8分</p>
+      <p class="hw">課題④ 資料提出 → ライブ発表会</p>
+    </div>
+  </div>
+</section>
+
+<section id="l2">
+  <h2 class="reveal">レベル2 · 3ヶ月 × 4回</h2>
+  <p class="section-lead reveal">動画32本（12回目はライブのみ）。課題⑤〜⑮、中間レビュー＋修了発表。</p>
+  <div class="months reveal">
+    <div class="month-pillar">
+      <h4>MONTH 1</h4>
+      <p class="title">組織向け機能の習得</p>
+      <ul>
+        <li>全体像・速習・Base改善 <span class="vid">3</span></li>
+        <li>承認フロー・フロー <span class="vid">4</span></li>
+        <li>ワークプレイス・権限 <span class="vid">4</span></li>
+        <li>高度自動化チェーン <span class="vid">4</span></li>
+      </ul>
+      <p style="margin-top:14px;font-size:12px;color:var(--text-muted);">小計 <strong>15本</strong> → 課題⑤〜⑧</p>
+    </div>
+    <div class="month-pillar">
+      <h4>MONTH 2</h4>
+      <p class="title">設計力・提案力</p>
+      <ul>
+        <li>ヒアリング <span class="vid">3</span></li>
+        <li>要件定義・項目定義 <span class="vid">3</span></li>
+        <li>業種別パターン <span class="vid">4</span></li>
+        <li>MVP・ロードマップ <span class="vid">2</span></li>
+      </ul>
+      <p style="margin-top:14px;font-size:12px;color:var(--text-muted);">小計 <strong>12本</strong> → 課題⑨〜⑫ · <strong style="color:var(--l2);">中間レビュー</strong></p>
+    </div>
+    <div class="month-pillar">
+      <h4>MONTH 3</h4>
+      <p class="title">模擬案件で完走</p>
+      <ul>
+        <li>模擬案件ガイド・ケース <span class="vid">2</span></li>
+        <li>構築チェックリスト <span class="vid">1</span></li>
+        <li>マニュアル・納品プレゼン <span class="vid">2</span></li>
+        <li>第12回 <span class="vid" style="color:var(--text-muted);">ライブ</span></li>
+      </ul>
+      <p style="margin-top:14px;font-size:12px;color:var(--text-muted);">小計 <strong>5本</strong> → 課題⑬〜⑮ · <strong style="color:var(--l2);">修了発表</strong></p>
+    </div>
+  </div>
+</section>
+
+<section id="l3">
+  <h2 class="reveal">レベル3 · 分岐</h2>
+  <p class="section-lead reveal">いずれもL2修了前提・3ヶ月。動画本数は運営で微調整可能な「案」。</p>
+  <div class="l3duo reveal">
+    <div class="l3box a">
+      <h3>3A クライアント</h3>
+      <p class="sub">「作れる」→「売れる」へ</p>
+      <dl>
+        <dt>動画（案）</dt>
+        <dd>27本</dd>
+        <dt>主題</dt>
+        <dd>ポジション · メニュー・価格 · 提案・契約 · 営業ファネル · 面談RP · 定着・月額 · 実績</dd>
+        <dt>ライブ</dt>
+        <dd>中間 · 修了（認定審査）</dd>
+      </dl>
+    </div>
+    <div class="l3box b">
+      <h3>3B エキスパート</h3>
+      <p class="sub">Larkの外側とつなぐ</p>
+      <dl>
+        <dt>動画（案）</dt>
+        <dd>28本</dd>
+        <dt>主題</dt>
+        <dd>高度自動化 · DB設計 · Open API · Bot · GAS · Webhook · Make/Zapier · MCP · 統合PJ</dd>
+        <dt>ライブ</dt>
+        <dd>中間 · 修了（技術審査）</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="summary">
+  <h2 class="reveal">集計一覧</h2>
+  <p class="section-lead reveal">講座専用のみ。ライブラリ40本は別テーブル管理推奨。</p>
+  <div class="reveal" style="overflow-x:auto;">
+    <table class="sum-table">
+      <thead>
+        <tr>
+          <th>コース</th>
+          <th>期間</th>
+          <th>講座専用動画</th>
+          <th>ライブ（主）</th>
+          <th>課題・成果物</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--l1);">L1</strong> 基礎</td>
+          <td>1ヶ月</td>
+          <td>34本</td>
+          <td>修了発表 1</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--l2);">L2</strong> 構築者</td>
+          <td>3ヶ月</td>
+          <td>32本</td>
+          <td>中間1 · 修了1</td>
+          <td>11（⑤〜⑮）</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--l3a);">L3A</strong></td>
+          <td>3ヶ月</td>
+          <td>27本（案）</td>
+          <td>中間1 · 修了1</td>
+          <td>月次成果物</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--l3b);">L3B</strong></td>
+          <td>3ヶ月</td>
+          <td>28本（案）</td>
+          <td>中間1 · 修了1</td>
+          <td>月次成果物</td>
+        </tr>
+        <tr>
+          <td><strong>合計</strong></td>
+          <td>—</td>
+          <td><strong>121本</strong></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <p>Lark講座 カリキュラムビジュアル · 正本は <a href="../L1-L3_動画・課題統合マスター.md">L1-L3_動画・課題統合マスター.md</a></p>
+  <p style="margin-top:8px;"><a href="index.html">講師向けポータル</a> · <a href="course-overview.html">受講生向けコース全体像</a></p>
+</footer>
+
+<script>
+(function () {
+  const io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        if (e.target.id === 'chart-block') {
+          document.querySelectorAll('.chart-row[data-bar]').forEach(function (row) {
+            row.classList.add('animated');
+          });
+        }
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal, #chart-block').forEach(function (el) {
+    io.observe(el);
+  });
+})();
+</script>
+</body>
+</html>
