@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ルックアップと双方向関連の違い｜Lark Base</title>
+<!-- deploy-check: grep "違いを比較してみよう" で本番HTMLに新セクションがあるか確認 -->
+<meta name="page-version" content="2026-03-26">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,6 +22,9 @@
   --ok: #15803d;
   --card: #fff;
   --shadow: 0 4px 24px rgba(0,0,0,0.06);
+  /* 集計フィールド（STEP3）— スライドの濃い青系 */
+  --agg: #1e3a8a;
+  --agg-bg: #dbeafe;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,7 +38,7 @@ body {
 }
 
 .wrap {
-  max-width: 720px;
+  max-width: 880px;
   margin: 0 auto;
   padding: 36px 18px 64px;
 }
@@ -345,6 +350,242 @@ footer {
   text-align: center;
 }
 footer a { color: var(--bi); font-weight: 700; }
+footer .page-rev {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #78716c;
+}
+footer .page-rev strong { color: var(--ok); }
+
+/* ── スライド準拠：比較表 ── */
+.section-title {
+  font-size: clamp(1.2rem, 3vw, 1.45rem);
+  font-weight: 800;
+  text-align: center;
+  margin: 48px 0 20px;
+  line-height: 1.4;
+}
+.section-title:first-of-type { margin-top: 8px; }
+
+.compare-wrap {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 20px 14px 24px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  margin-bottom: 28px;
+  overflow-x: auto;
+}
+table.compare {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+table.compare th,
+table.compare td {
+  border: 1px solid var(--line);
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.55;
+}
+table.compare thead th {
+  font-weight: 800;
+  font-size: 13px;
+}
+table.compare thead .th-bi {
+  background: var(--bi-bg);
+  color: #0c4a6e;
+  border-bottom: 3px solid var(--bi);
+}
+table.compare thead .th-lu {
+  background: var(--lu-bg);
+  color: #9a3412;
+  border-bottom: 3px solid var(--lu);
+}
+table.compare tbody th {
+  background: #f5f5f4;
+  font-weight: 700;
+  width: 22%;
+  white-space: nowrap;
+}
+table.compare tbody td strong { font-weight: 800; }
+
+/* ── 判断フロー 3STEP ── */
+.flow-section {
+  margin-bottom: 28px;
+}
+.flow-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+@media (min-width: 900px) {
+  .flow-steps {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .flow-steps .flow-card { flex: 1; min-width: 0; }
+}
+.flow-card {
+  border-radius: 14px;
+  padding: 18px 16px;
+  border: 2px solid transparent;
+  box-shadow: var(--shadow);
+}
+.flow-card .step-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+.flow-card .flow-q {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  line-height: 1.45;
+}
+.flow-card .flow-action {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.flow-card .flow-ex {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+  line-height: 1.5;
+}
+.flow-card.bi-flow {
+  background: var(--bi-bg);
+  border-color: var(--bi);
+}
+.flow-card.bi-flow .step-label { color: #0369a1; }
+.flow-card.lu-flow {
+  background: var(--lu-bg);
+  border-color: var(--lu);
+}
+.flow-card.lu-flow .step-label { color: #c2410c; }
+.flow-card.agg-flow {
+  background: var(--agg-bg);
+  border-color: var(--agg);
+}
+.flow-card.agg-flow .step-label { color: var(--agg); }
+.flow-footnote {
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  text-align: center;
+  padding: 14px 16px;
+  background: #fef3c7;
+  border-radius: 12px;
+  border: 1px solid #fcd34d;
+  line-height: 1.55;
+}
+
+/* ── Q&A グリッド ── */
+.qa-grid {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+@media (min-width: 640px) {
+  .qa-grid { grid-template-columns: 1fr 1fr; }
+}
+.qa-card {
+  border-radius: 14px;
+  padding: 18px 16px;
+  box-shadow: var(--shadow);
+  border: 2px solid var(--line);
+}
+.qa-card.bi-qa {
+  border-color: var(--bi);
+  background: linear-gradient(180deg, #fff 0%, var(--bi-bg) 100%);
+}
+.qa-card.lu-qa {
+  border-color: var(--lu);
+  background: linear-gradient(180deg, #fff 0%, var(--lu-bg) 100%);
+}
+.qa-card .q {
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  line-height: 1.45;
+}
+.qa-card.bi-qa .q { color: #0c4a6e; }
+.qa-card.lu-qa .q { color: #9a3412; }
+.qa-card .a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+/* ── まとめ（ダーク） ── */
+.summary-dark {
+  background: linear-gradient(160deg, #1e293b 0%, #0f172a 100%);
+  color: #f1f5f9;
+  border-radius: 16px;
+  padding: 28px 22px 24px;
+  margin-bottom: 32px;
+  box-shadow: var(--shadow);
+}
+.summary-dark h2 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff;
+}
+.summary-dark ol {
+  list-style: none;
+  counter-reset: sm;
+  padding: 0;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.summary-dark li {
+  counter-increment: sm;
+  position: relative;
+  padding: 12px 0 12px 2.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.65;
+}
+.summary-dark li:last-child { border-bottom: 0; }
+.summary-dark li::before {
+  content: counter(sm);
+  position: absolute;
+  left: 0;
+  top: 12px;
+  width: 28px;
+  height: 28px;
+  background: var(--bi);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.summary-dark li:nth-child(2)::before { background: var(--lu); }
+.summary-dark li:nth-child(3)::before { background: #64748b; }
+.summary-dark li:nth-child(4)::before { background: #94a3b8; color: #0f172a; }
+.summary-dark li strong { color: #fff; font-weight: 800; }
+.summary-dark .sum-foot {
+  margin-top: 18px;
+  font-size: 13px;
+  color: #cbd5e1;
+  text-align: center;
+  line-height: 1.55;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
 </style>
 </head>
 <body>
@@ -475,8 +716,105 @@ footer a { color: var(--bi); font-weight: 700; }
     <p class="note" style="margin-top:18px;border-left-color:var(--lu);">ルックアップ<strong>だけ</strong>では、お客様と案件の<strong>つなぎは作れません</strong>。先に「どのお客様か」が決まっている必要があります。</p>
   </div>
 
+  <h2 class="section-title" id="compare">違いを比較してみよう</h2>
+  <div class="compare-wrap" role="region" aria-labelledby="compare">
+    <table class="compare">
+      <thead>
+        <tr>
+          <th scope="col">比較項目</th>
+          <th scope="col" class="th-bi">双方向関連</th>
+          <th scope="col" class="th-lu">ルックアップ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">メインの役割</th>
+          <td>テーブル同士を<strong>つなぐ</strong></td>
+          <td>つながれた元の値を、<strong>ここに表示する</strong></td>
+        </tr>
+        <tr>
+          <th scope="row">単体で使える？</th>
+          <td><strong>使える（これを先に）</strong></td>
+          <td><strong>双方向関連のあと</strong>でないと使えない</td>
+        </tr>
+        <tr>
+          <th scope="row">データの編集</th>
+          <td>関連レコードを<strong>選ぶ・変えられる</strong></td>
+          <td><strong>読み取り専用</strong>（編集不可）</td>
+        </tr>
+        <tr>
+          <th scope="row">設定の順番</th>
+          <td><strong>① 先に</strong>設定</td>
+          <td><strong>② あとで</strong>設定</td>
+        </tr>
+        <tr>
+          <th scope="row">よくある用途</th>
+          <td>お客様と受注、商品と在庫などの<strong>紐づけ</strong></td>
+          <td>受注表に、お客様の<strong>電話・住所</strong>などを表示</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title" id="flow">いつ使う？ 判断フロー</h2>
+  <div class="flow-section" role="region" aria-labelledby="flow">
+    <div class="flow-steps">
+      <div class="flow-card bi-flow">
+        <p class="step-label">STEP 1</p>
+        <p class="flow-q">2つのテーブルを<strong>つなぎたい</strong>？</p>
+        <p class="flow-action">→ <strong>双方向関連</strong>を設定する</p>
+        <p class="flow-ex">例：お客様テーブルと受注テーブルをつなぐ</p>
+      </div>
+      <div class="flow-card lu-flow">
+        <p class="step-label">STEP 2</p>
+        <p class="flow-q">つながれた元の情報を、<strong>ここに表示したい</strong>？</p>
+        <p class="flow-action">→ <strong>ルックアップ</strong>を追加する</p>
+        <p class="flow-ex">例：受注表に、お客様の電話番号を表示する</p>
+      </div>
+      <div class="flow-card agg-flow">
+        <p class="step-label">STEP 3</p>
+        <p class="flow-q">つながれた元から<strong>集計したい</strong>？</p>
+        <p class="flow-action">→ <strong>集計フィールド</strong>を追加する</p>
+        <p class="flow-ex">例：お客様ごとの受注件数・合計金額を自動計算</p>
+      </div>
+    </div>
+    <p class="flow-footnote">Lark講座のハンズオンは「<strong>STEP 1 → STEP 2</strong>」の順で進めます。この順を守ると、<strong>設定ミスを防ぎやすい</strong>です。</p>
+  </div>
+
+  <h2 class="section-title" id="qa">受講生からよく出る質問 Q&amp;A</h2>
+  <div class="qa-grid" role="region" aria-labelledby="qa">
+    <div class="qa-card bi-qa">
+      <p class="q">Q1. 双方向にすると、データが2か所に二重になる？</p>
+      <p class="a">いいえ。同じつながりが<strong>両側から見える</strong>だけです。データはそれぞれのテーブルに<strong>1回ずつ</strong>あります。</p>
+    </div>
+    <div class="qa-card lu-qa">
+      <p class="q">Q2. ルックアップで取った値は編集できる？</p>
+      <p class="a">いいえ。<strong>読み取り専用</strong>です。変えるときは、元のテーブル（お客様マスタなど）で編集してください。</p>
+    </div>
+    <div class="qa-card bi-qa">
+      <p class="q">Q3. 常に双方向にすべき？</p>
+      <p class="a">基本は<strong>双方向を推奨</strong>です。「あっちの画面からも見たかった」が、あとから出ることが多いです。</p>
+    </div>
+    <div class="qa-card lu-qa">
+      <p class="q">Q4. ルックアップはいくつまで足せる？</p>
+      <p class="a"><strong>必要な分だけ</strong>足せます。電話・住所・担当者名など、使う項目を並べてOKです。</p>
+    </div>
+  </div>
+
+  <div class="summary-dark" role="region" aria-labelledby="sum-h">
+    <h2 id="sum-h">まとめ</h2>
+    <ol>
+      <li><strong>双方向関連</strong>＝テーブルを「<strong>つなぐ</strong>」。まずこれを設定する。</li>
+      <li><strong>ルックアップ</strong>＝つながれた元から「<strong>表示する</strong>」。双方向のあとに設定する。</li>
+      <li>設定の順番は常に「<strong>双方向関連 → ルックアップ</strong>」。逆はできません。</li>
+      <li>ルックアップで取った値は<strong>読み取り専用</strong>。変更は元テーブル側で行う。</li>
+    </ol>
+    <p class="sum-foot">講座の動画・ハンズオンでは、実際の画面でこの順に手を動かします。</p>
+  </div>
+
   <footer>
     <p>Lark講座 · わかりやすさ重視版</p>
+    <p class="page-rev" title="GitHub Pages にこの行が出ていれば、比較表・判断フロー・Q&amp;A・まとめ入りの版が配信されています">ページ版: <strong>2026-03-26</strong>（比較表・判断フロー・Q&amp;A・まとめ）</p>
     <p style="margin-top:10px;"><a href="index.html">講師向けポータル</a> · <a href="curriculum-map.html">カリキュラムマップ</a></p>
   </footer>
 </div>
